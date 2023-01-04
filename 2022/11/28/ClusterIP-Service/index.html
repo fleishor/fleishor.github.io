@@ -1,0 +1,123 @@
+<html lang="en"><head><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css"></head><body><x_layout_ejs">
+  
+  
+
+  <x_partial_head_ejs>
+
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Tachyons Core CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+  <meta name="generator" content="Hexo 6.3.0">
+</x_partial_head_ejs>
+
+  
+
+    <x_post_ejs>
+   <!-- Banner -->
+   <x_partial_banner_ejs>
+   <div class="w-100 bg-banner ph5-ns ph3 text-light mb4">
+
+      <nav class="db dt-l w-100 mw10 center border-box pv3">
+         <div class="db dtc-l v-mid w-100 w-75-l tc tr-l">
+            
+            <a class="link dim f6 f5-l dib mr3 mr4-l white" href="/" title="Home">
+               Home
+            </a>
+            
+         </div>
+      </nav>
+
+      <!-- Title -->
+      <div class="w-100 mw10 center vh-20 dt">
+         <div class="dtc v-mid white">
+            <h1 class="f1-l f2-m tc tc-m tl-ns mv0">My Digital Garden</h1>
+            <p class="ma0 pb3 f4 fw3 tc tc-m tl-ns">Digital Garden of Horst Fleischer</p>
+         </div>
+      </div>
+   </div>
+</x_partial_banner_ejs>
+
+   <!-- Content -->
+   <div class="w-100 ph2 ph4-m ph5-l">
+      <div class="content">
+         <div class="fl w-100 w-80-l mw9 left pr4-ns pr0-m mb4 br-l b--light-gray post-content">
+            <h1>
+               ClusterIP Service
+            </h1>
+            <div>
+               Erzeugt einen ClusterIP Service für Nginx Pods
+            </div>
+            <!-- Main Post Content -->
+            <h1 id="Skripte"><a href="#Skripte" class="headerlink" title="Skripte"></a>Skripte</h1><h2 id="Service-file"><a href="#Service-file" class="headerlink" title="Service file"></a>Service file</h2><figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Service</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">nginx-service-clusterip</span></span><br><span class="line">  <span class="attr">labels:</span></span><br><span class="line">    <span class="attr">app:</span> <span class="string">nginx-clusterip</span> <span class="comment"># lable for the ClusterIP service</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">app:</span> <span class="string">nginx-pods</span> <span class="comment"># Which Pods should be handled by this service</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">ClusterIP</span></span><br><span class="line">  <span class="attr">ports:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">http</span></span><br><span class="line">    <span class="attr">port:</span> <span class="number">8080</span> <span class="comment"># Exposed Port by ClusterIP</span></span><br><span class="line">    <span class="attr">targetPort:</span> <span class="number">80</span> <span class="comment"># Port in Pod which should be exposed</span></span><br><span class="line">    <span class="attr">protocol:</span> <span class="string">TCP</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="Check-ClusterIP-service"><a href="#Check-ClusterIP-service" class="headerlink" title="Check ClusterIP service"></a>Check ClusterIP service</h2><ul>
+<li>Der ClusterIP Service hat wieder einen eigenen IP-Bereich (10.110.0.0/16)</li>
+</ul>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fleishor@desktop:~/vagrant-kubernetes-cluster$ kubectl get services</span><br><span class="line">NAME                      TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)    AGE</span><br><span class="line">kubernetes                ClusterIP   10.96.0.1     &lt;none&gt;        443/TCP    17d</span><br><span class="line">nginx-service-clusterip   ClusterIP   10.110.1.81   &lt;none&gt;        8080/TCP   23h</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="DNS-ClusterIP-Service-Name-innerhalb-der-Pods-verwenden"><a href="#DNS-ClusterIP-Service-Name-innerhalb-der-Pods-verwenden" class="headerlink" title="DNS (ClusterIP Service Name) innerhalb der Pods verwenden"></a>DNS (ClusterIP Service Name) innerhalb der Pods verwenden</h2><ul>
+<li>Der ClusterIP Service (Adresse) ist nur innerhalb des Pod Netzwerkes verfügbar</li>
+<li>Der ClusterIP Service Name kann gleichzeitig als DomainName verwendet werden (FQDN: nginx-server-clusterip.default.svc.cluster.local)</li>
+<li>HTTP Anfragen an den ClusterIP Service leitet dieser an die Pods weiter (Round-Robin-Verfahren oder sowas ähnliches)</li>
+<li>Hauptaufgabe der ClusterIP ist das LoadBalancing auf die Pods</li>
+<li>Innerhalb eines Pods kann auch direkt auf einen anderen Pod zugegriffen werden.</li>
+</ul>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fleishor@desktop:~/vagrant-kubernetes-cluster$ kubectl exec -it nginx-deployment-c4b4cb578-4jqtr -c netshoot-container -- /bin/bash</span><br><span class="line">bash-5.2# curl nginx-service-clusterip:8080</span><br><span class="line">nginx-deployment-c4b4cb578-4jqtr</span><br><span class="line">bash-5.2# curl nginx-service-clusterip:8080</span><br><span class="line">nginx-deployment-c4b4cb578-5jcxd</span><br><span class="line">bash-5.2# curl nginx-service-clusterip:8080</span><br><span class="line">nginx-deployment-c4b4cb578-8qs5h</span><br></pre></td></tr></tbody></table></figure>
+
+         </div>
+         <!-- right side bar-->
+         <div class="fl w-100 w-20-l pl1-ns mb4">
+
+            <!-- Widget 1: Tags -->
+            
+            <x_partial_widget_tags_ejs>
+  <div class="">
+    <h2>Tags</h2>
+    
+    <p>
+      <a class="fw3 ph1 dib" href="/tags/Kubernetes/">Kubernetes</a>
+    </p>
+    
+    <p>
+      <a class="fw3 ph1 dib" href="/tags/Nginx/">Nginx</a>
+    </p>
+    
+    <p>
+      <a class="fw3 ph1 dib" href="/tags/ClusterIP/">ClusterIP</a>
+    </p>
+    
+  </div>
+</x_partial_widget_tags_ejs>
+            
+         </div>
+      </div>
+   </div>
+</x_post_ejs>
+
+    <x_partial_footer_ejs>
+   <div class="fixed db w-100 tc tr-l bg-1 bottom-0">
+      <a class="link dim f6 f5-l dib mr3 mr4-l white" href="/admin/datenschutzerklaerung.html" title="Datenschutzerklärung">
+         Datenschutzerklärung
+      </a>
+      <a class="link dim f6 f5-l dib mr3 mr4-l white" href="/admin/impressum.html" title="Impressum">
+         Impressum
+      </a>
+   </div>
+</x_partial_footer_ejs>
+
+  
+
+  
+</x_layout_ejs"></body><script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script><script>window.addEventListener("load", function(){window.cookieconsent.initialise({"theme":"classic","position":"bottom","static":true,"cookie":{"expiryDays":7},"content":{"message":"This website uses cookies to ensure you get the best experience on our website. Who doesn't like cookies?","dismiss":"Feed me"}})});</script></html>

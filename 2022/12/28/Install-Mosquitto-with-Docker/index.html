@@ -1,0 +1,121 @@
+<html lang="en"><head><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css"></head><body><x_layout_ejs">
+  
+  
+
+  <x_partial_head_ejs>
+
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Tachyons Core CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+  <meta name="generator" content="Hexo 6.3.0">
+</x_partial_head_ejs>
+
+  
+
+    <x_post_ejs>
+   <!-- Banner -->
+   <x_partial_banner_ejs>
+   <div class="w-100 bg-banner ph5-ns ph3 text-light mb4">
+
+      <nav class="db dt-l w-100 mw10 center border-box pv3">
+         <div class="db dtc-l v-mid w-100 w-75-l tc tr-l">
+            
+            <a class="link dim f6 f5-l dib mr3 mr4-l white" href="/" title="Home">
+               Home
+            </a>
+            
+         </div>
+      </nav>
+
+      <!-- Title -->
+      <div class="w-100 mw10 center vh-20 dt">
+         <div class="dtc v-mid white">
+            <h1 class="f1-l f2-m tc tc-m tl-ns mv0">My Digital Garden</h1>
+            <p class="ma0 pb3 f4 fw3 tc tc-m tl-ns">Digital Garden of Horst Fleischer</p>
+         </div>
+      </div>
+   </div>
+</x_partial_banner_ejs>
+
+   <!-- Content -->
+   <div class="w-100 ph2 ph4-m ph5-l">
+      <div class="content">
+         <div class="fl w-100 w-80-l mw9 left pr4-ns pr0-m mb4 br-l b--light-gray post-content">
+            <h1>
+               Installation Mosquitto with Docker
+            </h1>
+            <div>
+               Installation steps for Mosquitto with Docker
+            </div>
+            <!-- Main Post Content -->
+            <h1 id="Create-new-user-mosquitto"><a href="#Create-new-user-mosquitto" class="headerlink" title="Create new user mosquitto"></a>Create new user mosquitto</h1><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo useradd -m mosquitto</span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="Add-user-mosquitto-to-docker-group"><a href="#Add-user-mosquitto-to-docker-group" class="headerlink" title="Add user mosquitto to docker group"></a>Add user mosquitto to docker group</h1><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo usermod -aG docker mosquitto</span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="Login-as-user-mosquitto"><a href="#Login-as-user-mosquitto" class="headerlink" title="Login as user mosquitto"></a>Login as user mosquitto</h1><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo -u mosquitto -i</span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="Get-uid-and-gid-for-user-mosquitto"><a href="#Get-uid-and-gid-for-user-mosquitto" class="headerlink" title="Get uid and gid for user mosquitto"></a>Get uid and gid for user mosquitto</h1><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mosquitto@docker:~ $ <span class="built_in">id</span></span><br><span class="line">uid=1013(mosquitto) gid=1013(mosquitto) <span class="built_in">groups</span>=1013(mosquitto),995(docker)</span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="Create-directories-for-Mosquitto"><a href="#Create-directories-for-Mosquitto" class="headerlink" title="Create directories for Mosquitto"></a>Create directories for Mosquitto</h1><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> mosquitto</span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="docker-compose-yaml-file"><a href="#docker-compose-yaml-file" class="headerlink" title="docker-compose.yaml file"></a>docker-compose.yaml file</h1><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">version: <span class="string">"3.5"</span></span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line">  mosquitto:</span><br><span class="line">    image: eclipse-mosquitto:2.0.15</span><br><span class="line">    container_name: mosquitto</span><br><span class="line">    user: 1013:995</span><br><span class="line">    volumes:</span><br><span class="line">      - /home/mosquitto/mosquitto/config:/mosquitto/config:rw</span><br><span class="line">      - /home/mosquitto/mosquitto/log:/mosquitto/log:rw</span><br><span class="line">      - /home/mosquitto/mosquitto/data:/mosquitto/data:rw</span><br><span class="line">    ports:</span><br><span class="line">      - <span class="string">"1883:1883"</span></span><br><span class="line">      - <span class="string">"9001:9001"</span></span><br><span class="line">    restart: always</span><br><span class="line">    networks:</span><br><span class="line">        - influxdb2</span><br><span class="line"></span><br><span class="line">networks:</span><br><span class="line">    influxdb2:</span><br><span class="line">        external: <span class="literal">true</span></span><br><span class="line">        name: <span class="string">"influxdb2"</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="mosquitto-conf"><a href="#mosquitto-conf" class="headerlink" title="mosquitto.conf"></a>mosquitto.conf</h1><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">allow_anonymous true</span><br><span class="line">listener 1883</span><br><span class="line">persistence true</span><br><span class="line">persistence_location /mosquitto/data/</span><br><span class="line">log_dest file /mosquitto/log/mosquitto.log</span><br></pre></td></tr></tbody></table></figure>
+
+         </div>
+         <!-- right side bar-->
+         <div class="fl w-100 w-20-l pl1-ns mb4">
+
+            <!-- Widget 1: Tags -->
+            
+            <x_partial_widget_tags_ejs>
+  <div class="">
+    <h2>Tags</h2>
+    
+    <p>
+      <a class="fw3 ph1 dib" href="/tags/Docker/">Docker</a>
+    </p>
+    
+    <p>
+      <a class="fw3 ph1 dib" href="/tags/SmartHome/">SmartHome</a>
+    </p>
+    
+    <p>
+      <a class="fw3 ph1 dib" href="/tags/MQTT/">MQTT</a>
+    </p>
+    
+  </div>
+</x_partial_widget_tags_ejs>
+            
+         </div>
+      </div>
+   </div>
+</x_post_ejs>
+
+    <x_partial_footer_ejs>
+   <div class="fixed db w-100 tc tr-l bg-1 bottom-0">
+      <a class="link dim f6 f5-l dib mr3 mr4-l white" href="/admin/datenschutzerklaerung.html" title="Datenschutzerklärung">
+         Datenschutzerklärung
+      </a>
+      <a class="link dim f6 f5-l dib mr3 mr4-l white" href="/admin/impressum.html" title="Impressum">
+         Impressum
+      </a>
+   </div>
+</x_partial_footer_ejs>
+
+  
+
+  
+</x_layout_ejs"></body><script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script><script>window.addEventListener("load", function(){window.cookieconsent.initialise({"theme":"classic","position":"bottom","static":true,"cookie":{"expiryDays":7},"content":{"message":"This website uses cookies to ensure you get the best experience on our website. Who doesn't like cookies?","dismiss":"Feed me"}})});</script></html>

@@ -1,0 +1,119 @@
+<html lang="en"><head><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css"></head><body><x_layout_ejs">
+  
+  
+
+  <x_partial_head_ejs>
+
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Tachyons Core CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+  <meta name="generator" content="Hexo 6.3.0">
+</x_partial_head_ejs>
+
+  
+
+    <x_post_ejs>
+   <!-- Banner -->
+   <x_partial_banner_ejs>
+   <div class="w-100 bg-banner ph5-ns ph3 text-light mb4">
+
+      <nav class="db dt-l w-100 mw10 center border-box pv3">
+         <div class="db dtc-l v-mid w-100 w-75-l tc tr-l">
+            
+            <a class="link dim f6 f5-l dib mr3 mr4-l white" href="/" title="Home">
+               Home
+            </a>
+            
+         </div>
+      </nav>
+
+      <!-- Title -->
+      <div class="w-100 mw10 center vh-20 dt">
+         <div class="dtc v-mid white">
+            <h1 class="f1-l f2-m tc tc-m tl-ns mv0">My Digital Garden</h1>
+            <p class="ma0 pb3 f4 fw3 tc tc-m tl-ns">Digital Garden of Horst Fleischer</p>
+         </div>
+      </div>
+   </div>
+</x_partial_banner_ejs>
+
+   <!-- Content -->
+   <div class="w-100 ph2 ph4-m ph5-l">
+      <div class="content">
+         <div class="fl w-100 w-80-l mw9 left pr4-ns pr0-m mb4 br-l b--light-gray post-content">
+            <h1>
+               Install Promtail on RaspberryPi (homematic.fritz.box)
+            </h1>
+            <div>
+               Installation steps for Promtail on RaspberryPi without Docker
+            </div>
+            <!-- Main Post Content -->
+            <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p><a target="_blank" rel="noopener" href="https://sbcode.net/grafana/install-promtail-service/">https://sbcode.net/grafana/install-promtail-service/</a><br><a target="_blank" rel="noopener" href="https://grafana.com/docs/loki/latest/clients/promtail/troubleshooting/">https://grafana.com/docs/loki/latest/clients/promtail/troubleshooting/</a><br><a target="_blank" rel="noopener" href="https://regex101.com/">https://regex101.com/</a></p>
+<h2 id="Download-and-install-binary"><a href="#Download-and-install-binary" class="headerlink" title="Download and install binary"></a>Download and install binary</h2><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/local/bin</span><br><span class="line">sudo curl -O -L <span class="string">"https://github.com/grafana/loki/releases/download/v2.4.1/promtail-linux-arm.zip"</span></span><br><span class="line">sudo unzip <span class="string">"promtail-linux-arm.zip"</span></span><br><span class="line">sudo <span class="built_in">chmod</span> a+x <span class="string">"promtail-linux-arm</span></span><br><span class="line"><span class="string">rm "</span>promtail-linux-arm.zip<span class="string">"</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="x2F-etc-x2F-promtail-x2F-promtail-yml"><a href="#x2F-etc-x2F-promtail-x2F-promtail-yml" class="headerlink" title="/etc/promtail/promtail.yml"></a>/etc/promtail/promtail.yml</h2><figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">http_listen_address:</span> <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span></span><br><span class="line">  <span class="attr">http_listen_port:</span> <span class="number">9080</span></span><br><span class="line"></span><br><span class="line"><span class="attr">positions:</span></span><br><span class="line">  <span class="attr">filename:</span> <span class="string">/home/pi/promtail/positions.yaml</span></span><br><span class="line"></span><br><span class="line"><span class="attr">clients:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">url:</span> <span class="string">http://docker.fritz.box:3100/loki/api/v1/push</span></span><br><span class="line"></span><br><span class="line"><span class="attr">scrape_configs:</span></span><br><span class="line">   <span class="bullet">-</span> <span class="attr">job_name:</span> <span class="string">system</span></span><br><span class="line">     <span class="attr">static_configs:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">targets:</span></span><br><span class="line">           <span class="bullet">-</span> <span class="string">localhost</span></span><br><span class="line">          <span class="attr">labels:</span></span><br><span class="line">             <span class="attr">host:</span> <span class="string">homematic.fritz.box</span></span><br><span class="line">             <span class="attr">job:</span> <span class="string">varlogs</span></span><br><span class="line">             <span class="attr">__path__:</span> <span class="string">/var/log/*.log</span></span><br><span class="line">     <span class="attr">pipeline_stages:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">regex:</span></span><br><span class="line">           <span class="attr">expression:</span> <span class="string">(?P&lt;month&gt;\S+)\s+(?P&lt;date&gt;[0-9]{1,2})\s+(?P&lt;time&gt;[0-9]+:[0-9]+:[0-9]+)\s+(?P&lt;hostname&gt;\S+)\s+(?P&lt;daemon&gt;\S+)(?P&lt;pid&gt;\[[0-9]+\]):\s+</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">labels:</span></span><br><span class="line">           <span class="attr">daemon:</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="RegEx-for-parsing-the-syslogs"><a href="#RegEx-for-parsing-the-syslogs" class="headerlink" title="RegEx for parsing the syslogs"></a>RegEx for parsing the syslogs</h2><p>“P” is required</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(?P&lt;month&gt;\S+)\s+(?P&lt;date&gt;[0-9]{1,2})\s+(?P&lt;time&gt;[0-9]+:[0-9]+:[0-9]+)\s+(?P&lt;hostname&gt;\S+)\s+(?P&lt;daemon&gt;\S+)(?P&lt;pid&gt;\[[0-9]+\]):\s+</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="Test-promtail-configuration"><a href="#Test-promtail-configuration" class="headerlink" title="Test promtail configuration"></a>Test promtail configuration</h2><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"Jan  5 13:16:17 HomeMatic systemd[1]: Started Session 4858 of user pi."</span> | promtail-linux-arm --stdin --dry-run --inspect --client.url  http://docker.fritz.box:3100/loki/api/v1/push --config.file /etc/promtail/promtail.yml</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="Create-promtail-service-user"><a href="#Create-promtail-service-user" class="headerlink" title="Create promtail service user"></a>Create promtail service user</h2><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo useradd --system promtail</span><br><span class="line">usermod -a -G adm promtail</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="x2F-etc-x2F-systemd-x2F-system-x2F-promtail-service"><a href="#x2F-etc-x2F-systemd-x2F-system-x2F-promtail-service" class="headerlink" title="/etc/systemd/system/promtail.service"></a>/etc/systemd/system/promtail.service</h2><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Promtail service</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line">User=promtail</span><br><span class="line">ExecStart=/usr/local/bin/promtail-linux-arm -config.file /etc/promtail/promtail.yml</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="Start-promtail-service"><a href="#Start-promtail-service" class="headerlink" title="Start promtail service"></a>Start promtail service</h2><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl start promtail.service</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> promtail.service</span><br><span class="line">sudo systemctl status promtail.service</span><br></pre></td></tr></tbody></table></figure>
+
+         </div>
+         <!-- right side bar-->
+         <div class="fl w-100 w-20-l pl1-ns mb4">
+
+            <!-- Widget 1: Tags -->
+            
+            <x_partial_widget_tags_ejs>
+  <div class="">
+    <h2>Tags</h2>
+    
+    <p>
+      <a class="fw3 ph1 dib" href="/tags/SmartHome/">SmartHome</a>
+    </p>
+    
+    <p>
+      <a class="fw3 ph1 dib" href="/tags/Promtail/">Promtail</a>
+    </p>
+    
+  </div>
+</x_partial_widget_tags_ejs>
+            
+         </div>
+      </div>
+   </div>
+</x_post_ejs>
+
+    <x_partial_footer_ejs>
+   <div class="fixed db w-100 tc tr-l bg-1 bottom-0">
+      <a class="link dim f6 f5-l dib mr3 mr4-l white" href="/admin/datenschutzerklaerung.html" title="Datenschutzerklärung">
+         Datenschutzerklärung
+      </a>
+      <a class="link dim f6 f5-l dib mr3 mr4-l white" href="/admin/impressum.html" title="Impressum">
+         Impressum
+      </a>
+   </div>
+</x_partial_footer_ejs>
+
+  
+
+  
+</x_layout_ejs"></body><script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script><script>window.addEventListener("load", function(){window.cookieconsent.initialise({"theme":"classic","position":"bottom","static":true,"cookie":{"expiryDays":7},"content":{"message":"This website uses cookies to ensure you get the best experience on our website. Who doesn't like cookies?","dismiss":"Feed me"}})});</script></html>

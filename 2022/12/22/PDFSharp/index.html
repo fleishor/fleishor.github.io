@@ -1,0 +1,110 @@
+<html lang="en"><head><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css"></head><body><x_layout_ejs">
+  
+  
+
+  <x_partial_head_ejs>
+
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Tachyons Core CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+  <meta name="generator" content="Hexo 6.3.0">
+</x_partial_head_ejs>
+
+  
+
+    <x_post_ejs>
+   <!-- Banner -->
+   <x_partial_banner_ejs>
+   <div class="w-100 bg-banner ph5-ns ph3 text-light mb4">
+
+      <nav class="db dt-l w-100 mw10 center border-box pv3">
+         <div class="db dtc-l v-mid w-100 w-75-l tc tr-l">
+            
+            <a class="link dim f6 f5-l dib mr3 mr4-l white" href="/" title="Home">
+               Home
+            </a>
+            
+         </div>
+      </nav>
+
+      <!-- Title -->
+      <div class="w-100 mw10 center vh-20 dt">
+         <div class="dtc v-mid white">
+            <h1 class="f1-l f2-m tc tc-m tl-ns mv0">My Digital Garden</h1>
+            <p class="ma0 pb3 f4 fw3 tc tc-m tl-ns">Digital Garden of Horst Fleischer</p>
+         </div>
+      </div>
+   </div>
+</x_partial_banner_ejs>
+
+   <!-- Content -->
+   <div class="w-100 ph2 ph4-m ph5-l">
+      <div class="content">
+         <div class="fl w-100 w-80-l mw9 left pr4-ns pr0-m mb4 br-l b--light-gray post-content">
+            <h1>
+               PDFSharp
+            </h1>
+            <div>
+               Read a PDF document with PDFSharp, add some texts and save it with new name
+            </div>
+            <!-- Main Post Content -->
+            <h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a target="_blank" rel="noopener" href="http://www.pdfsharp.net/">PDFSharp</a></p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c#"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> PdfSharp.Drawing;</span><br><span class="line"><span class="keyword">using</span> PdfSharp.Pdf;</span><br><span class="line"><span class="keyword">using</span> PdfSharp.Pdf.Advanced;</span><br><span class="line"><span class="keyword">using</span> PdfSharp.Pdf.IO;</span><br><span class="line"></span><br><span class="line">System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);</span><br><span class="line"></span><br><span class="line">PdfDocument origDocument = PdfReader.Open(<span class="string">"C:\\Users\\fleishor\\MyDevelopment\\MyPdfSharp\\MyPdfSharp\\Formular.pdf"</span>, PdfDocumentOpenMode.Import);</span><br><span class="line">PdfDocument newDocument = <span class="keyword">new</span> PdfDocument();</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="built_in">int</span> pageIndex = <span class="number">0</span>; pageIndex &lt; origDocument.Pages.Count; pageIndex++)</span><br><span class="line">{</span><br><span class="line">    newDocument.AddPage(origDocument.Pages[pageIndex]);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">PdfPage page = newDocument.Pages[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">XGraphics gfx = XGraphics.FromPdfPage(page);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">XColor colorHelpLines = XColors.LightGreen;</span></span><br><span class="line"><span class="comment">XPen lineRed = new XPen(colorHelpLines, 1);</span></span><br><span class="line"><span class="comment">XFont font = new XFont("Verdana", 6, XFontStyle.Regular);</span></span><br><span class="line"><span class="comment">XRect rect = new XRect(0, 0, 20, 10);</span></span><br><span class="line"><span class="comment">for (int y = 0; y &lt; page.Height; y = y + 24)</span></span><br><span class="line"><span class="comment">{</span></span><br><span class="line"><span class="comment">    gfx.DrawLine(lineRed, 0, y, page.Width, y);</span></span><br><span class="line"><span class="comment">    rect.Y = y;</span></span><br><span class="line"><span class="comment">    gfx.DrawString(y.ToString(), font, XBrushes.LightGreen, rect, XStringFormats.BottomLeft);</span></span><br><span class="line"><span class="comment">}</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line">XFont fontText = <span class="keyword">new</span> XFont(<span class="string">"Verdana"</span>, <span class="number">10</span>, XFontStyle.Regular);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">XRect rectText = <span class="keyword">new</span> XRect(<span class="number">65</span>, <span class="number">264</span>, <span class="number">350</span>, <span class="number">24</span>);</span><br><span class="line">gfx.DrawString(<span class="string">"Hello, World!"</span>, fontText, XBrushes.Black, rectText, XStringFormats.BottomLeft);</span><br><span class="line"></span><br><span class="line">rectText = <span class="keyword">new</span> XRect(<span class="number">65</span>, <span class="number">288</span>, <span class="number">350</span>, <span class="number">24</span>);</span><br><span class="line">gfx.DrawString(<span class="string">"Hello, World!"</span>, fontText, XBrushes.Black, rectText, XStringFormats.BottomLeft);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">newDocument.Save(<span class="string">"C:\\Users\\fleishor\\MyDevelopment\\MyPdfSharp\\MyPdfSharp\\FormularAusgefuellt.pdf"</span>);</span><br></pre></td></tr></tbody></table></figure>
+
+         </div>
+         <!-- right side bar-->
+         <div class="fl w-100 w-20-l pl1-ns mb4">
+
+            <!-- Widget 1: Tags -->
+            
+            <x_partial_widget_tags_ejs>
+  <div class="">
+    <h2>Tags</h2>
+    
+    <p>
+      <a class="fw3 ph1 dib" href="/tags/C/">C#</a>
+    </p>
+    
+    <p>
+      <a class="fw3 ph1 dib" href="/tags/PDF/">PDF</a>
+    </p>
+    
+    <p>
+      <a class="fw3 ph1 dib" href="/tags/dotnet/">dotnet</a>
+    </p>
+    
+  </div>
+</x_partial_widget_tags_ejs>
+            
+         </div>
+      </div>
+   </div>
+</x_post_ejs>
+
+    <x_partial_footer_ejs>
+   <div class="fixed db w-100 tc tr-l bg-1 bottom-0">
+      <a class="link dim f6 f5-l dib mr3 mr4-l white" href="/admin/datenschutzerklaerung.html" title="Datenschutzerklärung">
+         Datenschutzerklärung
+      </a>
+      <a class="link dim f6 f5-l dib mr3 mr4-l white" href="/admin/impressum.html" title="Impressum">
+         Impressum
+      </a>
+   </div>
+</x_partial_footer_ejs>
+
+  
+
+  
+</x_layout_ejs"></body><script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script><script>window.addEventListener("load", function(){window.cookieconsent.initialise({"theme":"classic","position":"bottom","static":true,"cookie":{"expiryDays":7},"content":{"message":"This website uses cookies to ensure you get the best experience on our website. Who doesn't like cookies?","dismiss":"Feed me"}})});</script></html>

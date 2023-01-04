@@ -1,0 +1,123 @@
+<html lang="en"><head><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css"></head><body><x_layout_ejs">
+  
+  
+
+  <x_partial_head_ejs>
+
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Tachyons Core CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+  <meta name="generator" content="Hexo 6.3.0">
+</x_partial_head_ejs>
+
+  
+
+    <x_post_ejs>
+   <!-- Banner -->
+   <x_partial_banner_ejs>
+   <div class="w-100 bg-banner ph5-ns ph3 text-light mb4">
+
+      <nav class="db dt-l w-100 mw10 center border-box pv3">
+         <div class="db dtc-l v-mid w-100 w-75-l tc tr-l">
+            
+            <a class="link dim f6 f5-l dib mr3 mr4-l white" href="/" title="Home">
+               Home
+            </a>
+            
+         </div>
+      </nav>
+
+      <!-- Title -->
+      <div class="w-100 mw10 center vh-20 dt">
+         <div class="dtc v-mid white">
+            <h1 class="f1-l f2-m tc tc-m tl-ns mv0">My Digital Garden</h1>
+            <p class="ma0 pb3 f4 fw3 tc tc-m tl-ns">Digital Garden of Horst Fleischer</p>
+         </div>
+      </div>
+   </div>
+</x_partial_banner_ejs>
+
+   <!-- Content -->
+   <div class="w-100 ph2 ph4-m ph5-l">
+      <div class="content">
+         <div class="fl w-100 w-80-l mw9 left pr4-ns pr0-m mb4 br-l b--light-gray post-content">
+            <h1>
+               Installation InfluxDB 2.x with Docker
+            </h1>
+            <div>
+               Installation steps for InfluxDB 2.x with Docker
+            </div>
+            <!-- Main Post Content -->
+            <h1 id="Create-new-user-influxdb2"><a href="#Create-new-user-influxdb2" class="headerlink" title="Create new user influxdb2"></a>Create new user influxdb2</h1><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo useradd -m influxdb2</span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="Add-user-influxdb2-to-docker-group"><a href="#Add-user-influxdb2-to-docker-group" class="headerlink" title="Add user influxdb2 to docker group"></a>Add user influxdb2 to docker group</h1><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo usermod -aG docker influxdb2</span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="Login-as-user-influxdb2"><a href="#Login-as-user-influxdb2" class="headerlink" title="Login as user influxdb2"></a>Login as user influxdb2</h1><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo -u influxdb2 -i</span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="Get-uid-and-gid-for-user-influxdb2"><a href="#Get-uid-and-gid-for-user-influxdb2" class="headerlink" title="Get uid and gid for user influxdb2"></a>Get uid and gid for user influxdb2</h1><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">influxdb2@docker:~ $ <span class="built_in">id</span></span><br><span class="line">uid=1002(influxdb2) gid=1002(influxdb2) <span class="built_in">groups</span>=1002(influxdb2),995(docker)</span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="Create-directories-for-influxdb2"><a href="#Create-directories-for-influxdb2" class="headerlink" title="Create directories for influxdb2"></a>Create directories for influxdb2</h1><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">influxdb2@docker:~ $ <span class="built_in">mkdir</span> etc_influxdb2</span><br><span class="line">influxdb2@docker:~ $ <span class="built_in">mkdir</span> var_lib_influxdb2</span><br><span class="line"></span><br><span class="line">drwxr-xr-x 2 influxdb2 influxdb2 4096 Jul  6 08:08 etc_influxdb2</span><br><span class="line">drwxr-xr-x 2 influxdb2 influxdb2 4096 Jul  6 08:08 var_lib_influxdb2</span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="docker-compose-yaml-file"><a href="#docker-compose-yaml-file" class="headerlink" title="docker-compose.yaml file"></a>docker-compose.yaml file</h1><ul>
+<li>with long syntax for volumes</li>
+<li>create a new bridge network for influxdb2 and related containers</li>
+</ul>
+<figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">"3.5"</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">influxdb2:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">influxdb:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">influxdb2</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"8086:8086"</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">type:</span> <span class="string">bind</span></span><br><span class="line">        <span class="attr">source:</span> <span class="string">/home/influxdb2/var_lib_influxdb2</span></span><br><span class="line">        <span class="attr">target:</span> <span class="string">/var/lib/influxdb2</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">type:</span> <span class="string">bind</span></span><br><span class="line">        <span class="attr">source:</span> <span class="string">/home/influxdb2/etc_influxdb2</span></span><br><span class="line">        <span class="attr">target:</span> <span class="string">/etc/influxdb2</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">DOCKER_INFLUXDB_INIT_MODE=setup</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">DOCKER_INFLUXDB_INIT_USERNAME=fleishor</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">DOCKER_INFLUXDB_INIT_PASSWORD=***</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">DOCKER_INFLUXDB_INIT_ORG=fleishor</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">DOCKER_INFLUXDB_INIT_BUCKET=fleishor</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">DOCKER_INFLUXDB_INIT_RETENTION=90d</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=***</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">influxdb2</span></span><br><span class="line"></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line">  <span class="attr">influxdb2:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">"influxdb2"</span></span><br><span class="line">    <span class="attr">driver:</span> <span class="string">"bridge"</span></span><br></pre></td></tr></tbody></table></figure>
+
+         </div>
+         <!-- right side bar-->
+         <div class="fl w-100 w-20-l pl1-ns mb4">
+
+            <!-- Widget 1: Tags -->
+            
+            <x_partial_widget_tags_ejs>
+  <div class="">
+    <h2>Tags</h2>
+    
+    <p>
+      <a class="fw3 ph1 dib" href="/tags/Docker/">Docker</a>
+    </p>
+    
+    <p>
+      <a class="fw3 ph1 dib" href="/tags/SmartHome/">SmartHome</a>
+    </p>
+    
+    <p>
+      <a class="fw3 ph1 dib" href="/tags/InfluxDB/">InfluxDB</a>
+    </p>
+    
+  </div>
+</x_partial_widget_tags_ejs>
+            
+         </div>
+      </div>
+   </div>
+</x_post_ejs>
+
+    <x_partial_footer_ejs>
+   <div class="fixed db w-100 tc tr-l bg-1 bottom-0">
+      <a class="link dim f6 f5-l dib mr3 mr4-l white" href="/admin/datenschutzerklaerung.html" title="Datenschutzerklärung">
+         Datenschutzerklärung
+      </a>
+      <a class="link dim f6 f5-l dib mr3 mr4-l white" href="/admin/impressum.html" title="Impressum">
+         Impressum
+      </a>
+   </div>
+</x_partial_footer_ejs>
+
+  
+
+  
+</x_layout_ejs"></body><script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script><script>window.addEventListener("load", function(){window.cookieconsent.initialise({"theme":"classic","position":"bottom","static":true,"cookie":{"expiryDays":7},"content":{"message":"This website uses cookies to ensure you get the best experience on our website. Who doesn't like cookies?","dismiss":"Feed me"}})});</script></html>

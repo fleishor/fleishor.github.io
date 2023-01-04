@@ -1,0 +1,114 @@
+<html lang="en"><head><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css"></head><body><x_layout_ejs">
+  
+  
+
+  <x_partial_head_ejs>
+
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Tachyons Core CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+  <meta name="generator" content="Hexo 6.3.0">
+</x_partial_head_ejs>
+
+  
+
+    <x_post_ejs>
+   <!-- Banner -->
+   <x_partial_banner_ejs>
+   <div class="w-100 bg-banner ph5-ns ph3 text-light mb4">
+
+      <nav class="db dt-l w-100 mw10 center border-box pv3">
+         <div class="db dtc-l v-mid w-100 w-75-l tc tr-l">
+            
+            <a class="link dim f6 f5-l dib mr3 mr4-l white" href="/" title="Home">
+               Home
+            </a>
+            
+         </div>
+      </nav>
+
+      <!-- Title -->
+      <div class="w-100 mw10 center vh-20 dt">
+         <div class="dtc v-mid white">
+            <h1 class="f1-l f2-m tc tc-m tl-ns mv0">My Digital Garden</h1>
+            <p class="ma0 pb3 f4 fw3 tc tc-m tl-ns">Digital Garden of Horst Fleischer</p>
+         </div>
+      </div>
+   </div>
+</x_partial_banner_ejs>
+
+   <!-- Content -->
+   <div class="w-100 ph2 ph4-m ph5-l">
+      <div class="content">
+         <div class="fl w-100 w-80-l mw9 left pr4-ns pr0-m mb4 br-l b--light-gray post-content">
+            <h1>
+               Install NodeRed on RaspberryPi (homematic.fritz.box)
+            </h1>
+            <div>
+               Installation steps for NodeRed on RaspberryPi without Docker
+            </div>
+            <!-- Main Post Content -->
+            <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p><a target="_blank" rel="noopener" href="https://www.golinuxcloud.com/install-nodejs-and-npm-on-raspberry-pi/">https://www.golinuxcloud.com/install-nodejs-and-npm-on-raspberry-pi/</a><br><a target="_blank" rel="noopener" href="https://nodered.org/docs/getting-started/raspberrypi">https://nodered.org/docs/getting-started/raspberrypi</a></p>
+<h2 id="Enable-NodeSource-Repository"><a href="#Enable-NodeSource-Repository" class="headerlink" title="Enable NodeSource Repository"></a>Enable NodeSource Repository</h2><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo su</span><br><span class="line">curl -fsSL https://deb.nodesource.com/setup_17.x | bash -</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="Install-NodeJS"><a href="#Install-NodeJS" class="headerlink" title="Install NodeJS"></a>Install NodeJS</h2><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install nodejs</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="Check-NodeJS-installation"><a href="#Check-NodeJS-installation" class="headerlink" title="Check NodeJS installation"></a>Check NodeJS installation</h2><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pi@HomeMatic:/etc/promtail $ node --version</span><br><span class="line">v17.3.0</span><br><span class="line">pi@HomeMatic:/etc/promtail $ npm --version</span><br><span class="line">8.3.0</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="Install-Node-RED"><a href="#Install-Node-RED" class="headerlink" title="Install Node-RED"></a>Install Node-RED</h2><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash &lt;(curl -sL https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered)</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="Disable-credentialSecret-encryption"><a href="#Disable-credentialSecret-encryption" class="headerlink" title="Disable credentialSecret encryption"></a>Disable credentialSecret encryption</h2><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">setting.json</span><br><span class="line">   ...</span><br><span class="line">   credentialSecret: <span class="literal">false</span>,</span><br><span class="line">   ...</span><br></pre></td></tr></tbody></table></figure>
+
+         </div>
+         <!-- right side bar-->
+         <div class="fl w-100 w-20-l pl1-ns mb4">
+
+            <!-- Widget 1: Tags -->
+            
+            <x_partial_widget_tags_ejs>
+  <div class="">
+    <h2>Tags</h2>
+    
+    <p>
+      <a class="fw3 ph1 dib" href="/tags/SmartHome/">SmartHome</a>
+    </p>
+    
+    <p>
+      <a class="fw3 ph1 dib" href="/tags/NodeRed/">NodeRed</a>
+    </p>
+    
+  </div>
+</x_partial_widget_tags_ejs>
+            
+         </div>
+      </div>
+   </div>
+</x_post_ejs>
+
+    <x_partial_footer_ejs>
+   <div class="fixed db w-100 tc tr-l bg-1 bottom-0">
+      <a class="link dim f6 f5-l dib mr3 mr4-l white" href="/admin/datenschutzerklaerung.html" title="Datenschutzerklärung">
+         Datenschutzerklärung
+      </a>
+      <a class="link dim f6 f5-l dib mr3 mr4-l white" href="/admin/impressum.html" title="Impressum">
+         Impressum
+      </a>
+   </div>
+</x_partial_footer_ejs>
+
+  
+
+  
+</x_layout_ejs"></body><script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script><script>window.addEventListener("load", function(){window.cookieconsent.initialise({"theme":"classic","position":"bottom","static":true,"cookie":{"expiryDays":7},"content":{"message":"This website uses cookies to ensure you get the best experience on our website. Who doesn't like cookies?","dismiss":"Feed me"}})});</script></html>

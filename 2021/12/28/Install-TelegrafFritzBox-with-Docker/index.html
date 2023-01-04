@@ -1,0 +1,134 @@
+<html lang="en"><head><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css"></head><body><x_layout_ejs">
+  
+  
+
+  <x_partial_head_ejs>
+
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Tachyons Core CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+  <meta name="generator" content="Hexo 6.3.0">
+</x_partial_head_ejs>
+
+  
+
+    <x_post_ejs>
+   <!-- Banner -->
+   <x_partial_banner_ejs>
+   <div class="w-100 bg-banner ph5-ns ph3 text-light mb4">
+
+      <nav class="db dt-l w-100 mw10 center border-box pv3">
+         <div class="db dtc-l v-mid w-100 w-75-l tc tr-l">
+            
+            <a class="link dim f6 f5-l dib mr3 mr4-l white" href="/" title="Home">
+               Home
+            </a>
+            
+         </div>
+      </nav>
+
+      <!-- Title -->
+      <div class="w-100 mw10 center vh-20 dt">
+         <div class="dtc v-mid white">
+            <h1 class="f1-l f2-m tc tc-m tl-ns mv0">My Digital Garden</h1>
+            <p class="ma0 pb3 f4 fw3 tc tc-m tl-ns">Digital Garden of Horst Fleischer</p>
+         </div>
+      </div>
+   </div>
+</x_partial_banner_ejs>
+
+   <!-- Content -->
+   <div class="w-100 ph2 ph4-m ph5-l">
+      <div class="content">
+         <div class="fl w-100 w-80-l mw9 left pr4-ns pr0-m mb4 br-l b--light-gray post-content">
+            <h1>
+               Installation Telegraf-FritzBox with Docker
+            </h1>
+            <div>
+               Create a Docker image which fetch statistics from FritzBox and send them to Telegraf
+            </div>
+            <!-- Main Post Content -->
+            <h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a target="_blank" rel="noopener" href="https://github.com/Lexiv/TelegrafFritzBox">https://github.com/Lexiv/TelegrafFritzBox</a></p>
+<h1 id="Create-new-user-fritzbox"><a href="#Create-new-user-fritzbox" class="headerlink" title="Create new user fritzbox"></a>Create new user fritzbox</h1><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo useradd -m fritzbox</span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="Add-user-fritzbox-to-docker-group"><a href="#Add-user-fritzbox-to-docker-group" class="headerlink" title="Add user fritzbox to docker group"></a>Add user fritzbox to docker group</h1><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo usermod -aG docker fritzbox</span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="Login-as-user-fritzbox"><a href="#Login-as-user-fritzbox" class="headerlink" title="Login as user fritzbox"></a>Login as user fritzbox</h1><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo -u fritzbox -i</span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="Get-uid-and-gid-for-user-fritzbox"><a href="#Get-uid-and-gid-for-user-fritzbox" class="headerlink" title="Get uid and gid for user fritzbox"></a>Get uid and gid for user fritzbox</h1><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fritzbox@docker:~ $ <span class="built_in">id</span></span><br><span class="line">uid=1005(fritzbox) gid=1005(fritzbox) <span class="built_in">groups</span>=1005(fritzbox),995(docker)</span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="Clone-git-repository"><a href="#Clone-git-repository" class="headerlink" title="Clone git repository"></a>Clone git repository</h1><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/Lexiv/TelegrafFritzBox.git</span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="Install-required-packages"><a href="#Install-required-packages" class="headerlink" title="Install required packages"></a>Install required packages</h1><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt install python3-pip</span><br><span class="line">pip3 install fritzconnection</span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="crontab"><a href="#crontab" class="headerlink" title="crontab"></a>crontab</h1><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*/5 * * * * /home/fritzbox/telegrafFritzBox.sh</span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="telegrafFritzBox-sh"><a href="#telegrafFritzBox-sh" class="headerlink" title="telegrafFritzBox.sh"></a>telegrafFritzBox.sh</h1><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">${PATH}</span>:/home/fritzbox/.local/bin</span><br><span class="line">python3 /home/fritzbox/telegrafFritzBox.py -u <span class="variable">${FRITZ_USERNAME}</span> -p <span class="variable">${FRITZ_PASSWORD}</span> -i <span class="variable">${FRITZ_ADDRESS}</span> | nc -q 1 <span class="variable">${TELEGRAF_HOSTNAME}</span> <span class="variable">${TELEGRAF_PORT}</span></span><br><span class="line">python3 /home/fritzbox/telegrafFritzSmartHome.py -u <span class="variable">${FRITZ_USERNAME}</span> -p <span class="variable">${FRITZ_PASSWORD}</span> -i <span class="variable">${FRITZ_ADDRESS}</span> | nc -q 1 <span class="variable">${TELEGRAF_HOSTNAME}</span> <span class="variable">${TELEGRAF_PORT}</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h1><figure class="highlight dockerfile"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> alpine:latest</span><br><span class="line"></span><br><span class="line"><span class="comment">#install python3</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apk add python3 py3-pip netcat-openbsd sudo busybox-suid</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> addgroup -g 995 -S fritzbox &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    adduser -h <span class="string">"/home/fritzbox"</span> -S -G fritzbox -u 1005 fritzbox &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    <span class="built_in">echo</span> <span class="string">"fritzbox ALL=(ALL) NOPASSWD: ALL"</span> &gt; /etc/sudoers.d/fritzbox \</span></span><br><span class="line"><span class="language-bash">        &amp;&amp; <span class="built_in">chmod</span> 0440 /etc/sudoers.d/fritzbox</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">USER</span> fritzbox</span><br><span class="line"></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /home/fritzbox</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> pip3 install fritzconnection</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> --<span class="built_in">chown</span>=fritzbox:fritzbox ./TelegrafFritzBox/telegrafFritzBox.py .</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> --<span class="built_in">chown</span>=fritzbox:fritzbox ./TelegrafFritzBox/telegrafFritzSmartHome.py .</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> --<span class="built_in">chown</span>=fritzbox:fritzbox ./telegrafFritzBox.sh .</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">chmod</span> +x ./telegrafFritzBox.sh</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Configure cron</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> crontab /etc/cron/crontab</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Init cron</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> crontab /etc/cron/crontab</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> [<span class="string">"sudo"</span>, <span class="string">"-E"</span>, <span class="string">"crond"</span>, <span class="string">"-f"</span>]</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="Build-docker-image"><a href="#Build-docker-image" class="headerlink" title="Build docker image"></a>Build docker image</h1><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker image build -t fritzbox .</span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="docker-compose-yaml-file"><a href="#docker-compose-yaml-file" class="headerlink" title="docker-compose.yaml file"></a>docker-compose.yaml file</h1><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">version: <span class="string">"3.5"</span></span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line">  fritzbox:</span><br><span class="line">    image: fritzbox:latest</span><br><span class="line">    container_name: fritzbox</span><br><span class="line">    user: 1005:995</span><br><span class="line">    environment:</span><br><span class="line">      - FRITZ_ADDRESS=192.168.178.1</span><br><span class="line">      - FRITZ_USERNAME=collectd</span><br><span class="line">      - FRITZ_PASSWORD=***</span><br><span class="line">      - TELEGRAF_HOSTNAME=telegraf</span><br><span class="line">      - TELEGRAF_PORT=8094</span><br><span class="line">    restart: always</span><br><span class="line">    networks:</span><br><span class="line">        - influxdb2</span><br><span class="line">        </span><br><span class="line">networks:</span><br><span class="line">    influxdb2:</span><br><span class="line">        external: <span class="literal">true</span></span><br><span class="line">        name: <span class="string">"influxdb2"</span></span><br></pre></td></tr></tbody></table></figure>
+
+         </div>
+         <!-- right side bar-->
+         <div class="fl w-100 w-20-l pl1-ns mb4">
+
+            <!-- Widget 1: Tags -->
+            
+            <x_partial_widget_tags_ejs>
+  <div class="">
+    <h2>Tags</h2>
+    
+    <p>
+      <a class="fw3 ph1 dib" href="/tags/Docker/">Docker</a>
+    </p>
+    
+    <p>
+      <a class="fw3 ph1 dib" href="/tags/SmartHome/">SmartHome</a>
+    </p>
+    
+    <p>
+      <a class="fw3 ph1 dib" href="/tags/Telegraf/">Telegraf</a>
+    </p>
+    
+    <p>
+      <a class="fw3 ph1 dib" href="/tags/FritzBox/">FritzBox</a>
+    </p>
+    
+  </div>
+</x_partial_widget_tags_ejs>
+            
+         </div>
+      </div>
+   </div>
+</x_post_ejs>
+
+    <x_partial_footer_ejs>
+   <div class="fixed db w-100 tc tr-l bg-1 bottom-0">
+      <a class="link dim f6 f5-l dib mr3 mr4-l white" href="/admin/datenschutzerklaerung.html" title="Datenschutzerklärung">
+         Datenschutzerklärung
+      </a>
+      <a class="link dim f6 f5-l dib mr3 mr4-l white" href="/admin/impressum.html" title="Impressum">
+         Impressum
+      </a>
+   </div>
+</x_partial_footer_ejs>
+
+  
+
+  
+</x_layout_ejs"></body><script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script><script>window.addEventListener("load", function(){window.cookieconsent.initialise({"theme":"classic","position":"bottom","static":true,"cookie":{"expiryDays":7},"content":{"message":"This website uses cookies to ensure you get the best experience on our website. Who doesn't like cookies?","dismiss":"Feed me"}})});</script></html>
