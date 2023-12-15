@@ -3,24 +3,24 @@
   
 
   <x_partial_head_ejs>
+   
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- Tachyons Core CSS -->
+      <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css">
 
-    <!-- Tachyons Core CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css">
+      <!-- Custom Fonts -->
+      <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-    <!-- Custom Fonts -->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- Custom CSS -->
-    
+      <!-- Custom CSS -->
+      
 <link rel="stylesheet" href="/css/style.css">
 
-  <meta name="generator" content="Hexo 6.3.0">
+   <meta name="generator" content="Hexo 6.3.0">
 </x_partial_head_ejs>
+
 
   
 
@@ -59,6 +59,10 @@
             <div>
                Installation steps for Mosquitto with Docker
             </div>
+
+            <!-- TOC -->
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Create-new-user-mosquitto"><span class="toc-number">1.</span> <span class="toc-text">Create new user mosquitto</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Add-user-mosquitto-to-docker-group"><span class="toc-number">2.</span> <span class="toc-text">Add user mosquitto to docker group</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Login-as-user-mosquitto"><span class="toc-number">3.</span> <span class="toc-text">Login as user mosquitto</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Get-uid-and-gid-for-user-mosquitto"><span class="toc-number">4.</span> <span class="toc-text">Get uid and gid for user mosquitto</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Create-directories-for-Mosquitto"><span class="toc-number">5.</span> <span class="toc-text">Create directories for Mosquitto</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#docker-compose-yaml-file"><span class="toc-number">6.</span> <span class="toc-text">docker-compose.yaml file</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#mosquitto-conf"><span class="toc-number">7.</span> <span class="toc-text">mosquitto.conf</span></a></li></ol>
+
             <!-- Main Post Content -->
             <h1 id="Create-new-user-mosquitto"><a href="#Create-new-user-mosquitto" class="headerlink" title="Create new user mosquitto"></a>Create new user mosquitto</h1><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo useradd -m mosquitto</span><br></pre></td></tr></tbody></table></figure>
 
@@ -99,6 +103,10 @@
   </div>
 </x_partial_widget_tags_ejs>
             
+
+            <!-- Widget 2: ExternalLinks -->
+            
+   
          </div>
       </div>
    </div>

@@ -68,6 +68,15 @@ body {
   opacity: 0.5;
   transition: all 0.15s ease-in;
 }
+.toc {
+  padding: 10px 0;
+  margin: 10px 0;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+.toc li {
+  list-style-type: none;
+}
 .content figure.highlight {
   margin-left: 0;
   margin-right: 0;

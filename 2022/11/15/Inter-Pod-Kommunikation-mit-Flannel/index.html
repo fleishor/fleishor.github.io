@@ -3,24 +3,24 @@
   
 
   <x_partial_head_ejs>
+   
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- Tachyons Core CSS -->
+      <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css">
 
-    <!-- Tachyons Core CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css">
+      <!-- Custom Fonts -->
+      <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-    <!-- Custom Fonts -->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- Custom CSS -->
-    
+      <!-- Custom CSS -->
+      
 <link rel="stylesheet" href="/css/style.css">
 
-  <meta name="generator" content="Hexo 6.3.0">
+   <meta name="generator" content="Hexo 6.3.0">
 </x_partial_head_ejs>
+
 
   
 
@@ -59,6 +59,10 @@
             <div>
                Inter-Pod-Kommunkation mit Flannel
             </div>
+
+            <!-- TOC -->
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Ubersicht"><span class="toc-number">1.</span> <span class="toc-text">Übersicht</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Ablauf"><span class="toc-number">2.</span> <span class="toc-text">Ablauf</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Konfiguration-Flannel"><span class="toc-number">2.1.</span> <span class="toc-text">Konfiguration Flannel</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Curl-von-einem-Pod-auf-node-01-zu-einem-Pod-auf-node-02"><span class="toc-number">2.2.</span> <span class="toc-text">Curl von einem Pod auf node-01 zu einem Pod auf node-02</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Auf-den-Node-01-laufen-2-Pods-mit-jeweils-2-Containern-drinnen"><span class="toc-number">2.3.</span> <span class="toc-text">Auf den Node-01 laufen 2 Pods (mit jeweils 2 Containern drinnen)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Netzwerk-Konfiguration-im-Pod-7xztr"><span class="toc-number">2.4.</span> <span class="toc-text">Netzwerk-Konfiguration im Pod -7xztr</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bridge-Interface-cni0-auf-Host-node-01"><span class="toc-number">2.5.</span> <span class="toc-text">Bridge-Interface cni0 auf Host node-01</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Alle-Netzwerk-Interface-auf-Host-node-01"><span class="toc-number">2.6.</span> <span class="toc-text">Alle Netzwerk-Interface auf Host node-01</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IP-Adresses-of-Host-node-01"><span class="toc-number">2.7.</span> <span class="toc-text">IP-Adresses of Host node-01</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Routing-auf-Host-node-01"><span class="toc-number">2.8.</span> <span class="toc-text">Routing auf Host node-01</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Flanneld-Daemon"><span class="toc-number">2.9.</span> <span class="toc-text">Flanneld Daemon</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Quellen"><span class="toc-number">3.</span> <span class="toc-text">Quellen</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Tags"><span class="toc-number">4.</span> <span class="toc-text">Tags</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Pflegeanleitung"><span class="toc-number">5.</span> <span class="toc-text">Pflegeanleitung</span></a></li></ol>
+
             <!-- Main Post Content -->
             <h1 id="Ubersicht"><a href="#Ubersicht" class="headerlink" title="Übersicht"></a>Übersicht</h1><p>Innerhalb Kubernetes kann sich jeder Pod mit jedem anderem Pod unterhalten, unabhängig ob er auf dem gleichen Knoten läuft oder auf einem anderem. Gelöst wird das über das CNI (Container Network Interface) von Kubernetes. Hier wird erklärt, wie es mit Flannel funktioniert.</p>
 <h1 id="Ablauf"><a href="#Ablauf" class="headerlink" title="Ablauf"></a>Ablauf</h1><p><img src="/2022/11/15/Inter-Pod-Kommunikation-mit-Flannel/Nginx-Netzwerk-Container2Container.drawio.png" alt="Kubernetes Netzwerk"></p>
@@ -139,6 +143,10 @@ Der Auflauf ist wie folgt:</li>
   </div>
 </x_partial_widget_tags_ejs>
             
+
+            <!-- Widget 2: ExternalLinks -->
+            
+   
          </div>
       </div>
    </div>

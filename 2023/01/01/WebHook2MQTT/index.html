@@ -3,24 +3,24 @@
   
 
   <x_partial_head_ejs>
+   
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- Tachyons Core CSS -->
+      <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css">
 
-    <!-- Tachyons Core CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css">
+      <!-- Custom Fonts -->
+      <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-    <!-- Custom Fonts -->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- Custom CSS -->
-    
+      <!-- Custom CSS -->
+      
 <link rel="stylesheet" href="/css/style.css">
 
-  <meta name="generator" content="Hexo 6.3.0">
+   <meta name="generator" content="Hexo 6.3.0">
 </x_partial_head_ejs>
+
 
   
 
@@ -59,6 +59,10 @@
             <div>
                Forward WebHook POST Requests as MQTT
             </div>
+
+            <!-- TOC -->
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#References"><span class="toc-number">1.</span> <span class="toc-text">References</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#File-tsconfig-json"><span class="toc-number">2.</span> <span class="toc-text">File tsconfig.json</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#File-package-json"><span class="toc-number">3.</span> <span class="toc-text">File  package.json</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#File-eslintrc-jrc"><span class="toc-number">4.</span> <span class="toc-text">File .eslintrc.jrc</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Dockerfile"><span class="toc-number">5.</span> <span class="toc-text">Dockerfile</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Generate-Javascript-from-Typescript"><span class="toc-number">6.</span> <span class="toc-text">Generate Javascript from Typescript</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Run-webhook2mqtt-js"><span class="toc-number">7.</span> <span class="toc-text">Run webhook2mqtt.js</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Create-Docker-image"><span class="toc-number">8.</span> <span class="toc-text">Create Docker image</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Source-code-webhook2mqtt-ts"><span class="toc-number">9.</span> <span class="toc-text">Source code webhook2mqtt.ts</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Create-new-user-webhook2mqtt"><span class="toc-number">10.</span> <span class="toc-text">Create new user webhook2mqtt</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Add-user-webhook2mqtt-to-docker-group"><span class="toc-number">11.</span> <span class="toc-text">Add user webhook2mqtt to docker group</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Login-as-user-webhook2mqtt"><span class="toc-number">12.</span> <span class="toc-text">Login as user webhook2mqtt</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Get-uid-and-gid-for-user-webhook2mqtt"><span class="toc-number">13.</span> <span class="toc-text">Get uid and gid for user webhook2mqtt</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#File-docker-compose-yaml"><span class="toc-number">14.</span> <span class="toc-text">File docker-compose.yaml</span></a></li></ol>
+
             <!-- Main Post Content -->
             <h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a target="_blank" rel="noopener" href="https://betterstack.com/community/guides/logging/how-to-install-setup-and-use-winston-and-morgan-to-log-node-js-applications/">https://betterstack.com/community/guides/logging/how-to-install-setup-and-use-winston-and-morgan-to-log-node-js-applications/</a><br><a target="_blank" rel="noopener" href="http://www.steves-internet-guide.com/using-node-mqtt-client/">http://www.steves-internet-guide.com/using-node-mqtt-client/</a><br><a target="_blank" rel="noopener" href="https://nodejs.org/en/docs/guides/nodejs-docker-webapp/">https://nodejs.org/en/docs/guides/nodejs-docker-webapp/</a></p>
 <h1 id="File-tsconfig-json"><a href="#File-tsconfig-json" class="headerlink" title="File tsconfig.json"></a>File tsconfig.json</h1><figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">{</span></span><br><span class="line">&nbsp; <span class="attr">"compilerOptions"</span><span class="punctuation">:</span> <span class="punctuation">{</span></span><br><span class="line">&nbsp; &nbsp; <span class="attr">"module"</span><span class="punctuation">:</span> <span class="string">"commonjs"</span><span class="punctuation">,</span></span><br><span class="line">&nbsp; &nbsp; <span class="attr">"esModuleInterop"</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">&nbsp; &nbsp; <span class="attr">"target"</span><span class="punctuation">:</span> <span class="string">"es6"</span><span class="punctuation">,</span></span><br><span class="line">&nbsp; &nbsp; <span class="attr">"moduleResolution"</span><span class="punctuation">:</span> <span class="string">"node"</span><span class="punctuation">,</span></span><br><span class="line">&nbsp; &nbsp; <span class="attr">"sourceMap"</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">&nbsp; &nbsp; <span class="attr">"outDir"</span><span class="punctuation">:</span> <span class="string">"dist"</span></span><br><span class="line">&nbsp; <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">&nbsp; <span class="attr">"lib"</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">"es2015"</span><span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">}</span></span><br></pre></td></tr></tbody></table></figure>
@@ -102,7 +106,7 @@
     </p>
     
     <p>
-      <a class="fw3 ph1 dib" href="/tags/MQTT/">MQTT</a>
+      <a class="fw3 ph1 dib" href="/tags/Typescript/">Typescript</a>
     </p>
     
     <p>
@@ -110,11 +114,11 @@
     </p>
     
     <p>
-      <a class="fw3 ph1 dib" href="/tags/ExpressJS/">ExpressJS</a>
+      <a class="fw3 ph1 dib" href="/tags/MQTT/">MQTT</a>
     </p>
     
     <p>
-      <a class="fw3 ph1 dib" href="/tags/Typescript/">Typescript</a>
+      <a class="fw3 ph1 dib" href="/tags/ExpressJS/">ExpressJS</a>
     </p>
     
     <p>
@@ -124,6 +128,10 @@
   </div>
 </x_partial_widget_tags_ejs>
             
+
+            <!-- Widget 2: ExternalLinks -->
+            
+   
          </div>
       </div>
    </div>

@@ -1,0 +1,116 @@
+<html lang="en"><head><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css"></head><body><x_layout_ejs">
+  
+  
+
+  <x_partial_head_ejs>
+   
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <!-- Tachyons Core CSS -->
+      <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css">
+
+      <!-- Custom Fonts -->
+      <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+      <!-- Custom CSS -->
+      
+<link rel="stylesheet" href="/css/style.css">
+
+   <meta name="generator" content="Hexo 6.3.0">
+</x_partial_head_ejs>
+
+
+  
+
+    <x_post_ejs>
+   <!-- Banner -->
+   <x_partial_banner_ejs>
+   <div class="w-100 bg-banner ph5-ns ph3 text-light mb4">
+
+      <nav class="db dt-l w-100 mw10 center border-box pv3">
+         <div class="db dtc-l v-mid w-100 w-75-l tc tr-l">
+            
+            <a class="link dim f6 f5-l dib mr3 mr4-l white" href="/" title="Home">
+               Home
+            </a>
+            
+         </div>
+      </nav>
+
+      <!-- Title -->
+      <div class="w-100 mw10 center vh-20 dt">
+         <div class="dtc v-mid white">
+            <h1 class="f1-l f2-m tc tc-m tl-ns mv0">My Digital Garden</h1>
+            <p class="ma0 pb3 f4 fw3 tc tc-m tl-ns">Digital Garden of Horst Fleischer</p>
+         </div>
+      </div>
+   </div>
+</x_partial_banner_ejs>
+
+   <!-- Content -->
+   <div class="w-100 ph2 ph4-m ph5-l">
+      <div class="content">
+         <div class="fl w-100 w-80-l mw9 left pr4-ns pr0-m mb4 br-l b--light-gray post-content">
+            <h1>
+               Backup HDD to image file and mount the image file
+            </h1>
+            <div>
+               Backup hard disc with dd to image file and mount the image file
+            </div>
+
+            <!-- TOC -->
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Get-partitions-of-a-HDD"><span class="toc-number">1.</span> <span class="toc-text">Get partitions of a HDD</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Dump-HDD-to-image-file"><span class="toc-number">2.</span> <span class="toc-text">Dump HDD to image file</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Mount-image-to-file-system-mnt-ntfs1"><span class="toc-number">3.</span> <span class="toc-text">Mount image to file system /mnt/ntfs1</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Unmount"><span class="toc-number">4.</span> <span class="toc-text">Unmount</span></a></li></ol>
+
+            <!-- Main Post Content -->
+            <h1 id="Get-partitions-of-a-HDD"><a href="#Get-partitions-of-a-HDD" class="headerlink" title="Get partitions of a HDD"></a>Get partitions of a HDD</h1><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">sudo parted -l</span><br><span class="line"></span><br><span class="line">Modell: ATA SanDisk SSD PLUS (scsi)</span><br><span class="line">Festplatte  /dev/sda:  480GB</span><br><span class="line">Sektorgröße (logisch/physisch): 512B/512B</span><br><span class="line">Partitionstabelle: gpt</span><br><span class="line">Disk-Flags: </span><br><span class="line"></span><br><span class="line">Nummer  Anfang  Ende   Größe  Dateisystem  Name                  Flags</span><br><span class="line"> 1      1049kB  538MB  537MB  fat32        EFI System Partition  boot, esp</span><br><span class="line"> 2      538MB   480GB  480GB  ext4</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Modell: ATA WDC WD10EZEX-21W (scsi)</span><br><span class="line">Festplatte  /dev/sdb:  1000GB</span><br><span class="line">Sektorgröße (logisch/physisch): 512B/4096B</span><br><span class="line">Partitionstabelle: gpt</span><br><span class="line">Disk-Flags: </span><br><span class="line"></span><br><span class="line">Nummer  Anfang  Ende    Größe   Dateisystem  Name  Flags</span><br><span class="line"> 1      1049kB  1000GB  1000GB  ext4</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Modell: ST950032 5AS (scsi)</span><br><span class="line">Festplatte  /dev/sdc:  500GB</span><br><span class="line">Sektorgröße (logisch/physisch): 512B/512B</span><br><span class="line">Partitionstabelle: gpt</span><br><span class="line">Disk-Flags: </span><br><span class="line"></span><br><span class="line">Nummer  Anfang  Ende   Größe   Dateisystem  Name                          Flags</span><br><span class="line"> 1      1049kB  420MB  419MB   ntfs         Basic data partition          versteckt, diag</span><br><span class="line"> 2      420MB   735MB  315MB   fat32        EFI system partition          boot, esp</span><br><span class="line"> 3      735MB   869MB  134MB                Microsoft reserved partition  msftres</span><br><span class="line"> 4      869MB   243GB  242GB   ntfs         Basic data partition          msftdata</span><br><span class="line"> 5      243GB   483GB  241GB   ntfs         Basic data partition          msftdata</span><br><span class="line"> 6      483GB   500GB  16,6GB  ntfs         Basic data partition          versteckt, diag</span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="Dump-HDD-to-image-file"><a href="#Dump-HDD-to-image-file" class="headerlink" title="Dump HDD to image file"></a>Dump HDD to image file</h1><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">dd</span> <span class="keyword">if</span>=/dev/sdc4 of=sdc4.img status=progress</span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="Mount-image-to-file-system-mnt-ntfs1"><a href="#Mount-image-to-file-system-mnt-ntfs1" class="headerlink" title="Mount image to file system /mnt/ntfs1"></a>Mount image to file system /mnt/ntfs1</h1><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mount -o loop sdc4.img /mnt/ntfs1</span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="Unmount"><a href="#Unmount" class="headerlink" title="Unmount"></a>Unmount</h1><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo umount /mnt/ntfs1/</span><br></pre></td></tr></tbody></table></figure>
+
+
+         </div>
+         <!-- right side bar-->
+         <div class="fl w-100 w-20-l pl1-ns mb4">
+
+            <!-- Widget 1: Tags -->
+            
+            <x_partial_widget_tags_ejs>
+  <div class="">
+    <h2>Tags</h2>
+    
+    <p>
+      <a class="fw3 ph1 dib" href="/tags/Linux/">Linux</a>
+    </p>
+    
+  </div>
+</x_partial_widget_tags_ejs>
+            
+
+            <!-- Widget 2: ExternalLinks -->
+            
+   
+         </div>
+      </div>
+   </div>
+</x_post_ejs>
+
+    <x_partial_footer_ejs>
+   <div class="fixed db w-100 tc tr-l bg-1 bottom-0">
+      <a class="link dim f6 f5-l dib mr3 mr4-l white" href="/admin/datenschutzerklaerung.html" title="Datenschutzerklärung">
+         Datenschutzerklärung
+      </a>
+      <a class="link dim f6 f5-l dib mr3 mr4-l white" href="/admin/impressum.html" title="Impressum">
+         Impressum
+      </a>
+   </div>
+</x_partial_footer_ejs>
+
+  
+
+  
+</x_layout_ejs"></body><script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script><script>window.addEventListener("load", function(){window.cookieconsent.initialise({"theme":"classic","position":"bottom","static":true,"cookie":{"expiryDays":7},"content":{"message":"This website uses cookies to ensure you get the best experience on our website. Who doesn't like cookies?","dismiss":"Feed me"}})});</script></html>

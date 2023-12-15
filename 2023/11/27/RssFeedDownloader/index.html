@@ -1,0 +1,156 @@
+<html lang="en"><head><link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css"></head><body><x_layout_ejs">
+  
+  
+
+  <x_partial_head_ejs>
+   
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <!-- Tachyons Core CSS -->
+      <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css">
+
+      <!-- Custom Fonts -->
+      <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+      <!-- Custom CSS -->
+      
+<link rel="stylesheet" href="/css/style.css">
+
+   <meta name="generator" content="Hexo 6.3.0">
+</x_partial_head_ejs>
+
+
+  
+
+    <x_post_ejs>
+   <!-- Banner -->
+   <x_partial_banner_ejs>
+   <div class="w-100 bg-banner ph5-ns ph3 text-light mb4">
+
+      <nav class="db dt-l w-100 mw10 center border-box pv3">
+         <div class="db dtc-l v-mid w-100 w-75-l tc tr-l">
+            
+            <a class="link dim f6 f5-l dib mr3 mr4-l white" href="/" title="Home">
+               Home
+            </a>
+            
+         </div>
+      </nav>
+
+      <!-- Title -->
+      <div class="w-100 mw10 center vh-20 dt">
+         <div class="dtc v-mid white">
+            <h1 class="f1-l f2-m tc tc-m tl-ns mv0">My Digital Garden</h1>
+            <p class="ma0 pb3 f4 fw3 tc tc-m tl-ns">Digital Garden of Horst Fleischer</p>
+         </div>
+      </div>
+   </div>
+</x_partial_banner_ejs>
+
+   <!-- Content -->
+   <div class="w-100 ph2 ph4-m ph5-l">
+      <div class="content">
+         <div class="fl w-100 w-80-l mw9 left pr4-ns pr0-m mb4 br-l b--light-gray post-content">
+            <h1>
+               RSSFeedDownloader
+            </h1>
+            <div>
+               Mit RSSFeedDownloader können Prodcasts von BR und von ARD Audiothek heruntergeladen werden
+            </div>
+
+            <!-- TOC -->
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Podcast-von-BR-herunterladen"><span class="toc-number">1.</span> <span class="toc-text">Podcast von BR herunterladen</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Podcast-mit-curl-herunterladen-und-in-%E2%80%9CPodcast-xml%E2%80%9D-speichern"><span class="toc-number">1.1.</span> <span class="toc-text">Podcast mit curl herunterladen und in “Podcast.xml” speichern</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Verzeichnis-downloads-anlegen"><span class="toc-number">1.2.</span> <span class="toc-text">Verzeichnis ./downloads anlegen</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Filterdatum-im-Typescript-file-line-8-anpassen"><span class="toc-number">1.3.</span> <span class="toc-text">Filterdatum im Typescript file, line 8 anpassen</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RssFeedDownloader-aufrufen"><span class="toc-number">1.4.</span> <span class="toc-text">RssFeedDownloader aufrufen</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generierte-Statements-ausfuhren-und-Audiodateien-herunterladen"><span class="toc-number">1.5.</span> <span class="toc-text">Generierte Statements ausführen und Audiodateien herunterladen</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Podcast-von-der-ARD-Audiothek-herunterladen"><span class="toc-number">2.</span> <span class="toc-text">Podcast von der ARD Audiothek herunterladen</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Install-ARDAudiothek-RSSFeed-converter"><span class="toc-number">2.1.</span> <span class="toc-text">Install ARDAudiothek -&gt; RSSFeed converter</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Podcast-mit-curl-herunterladen-und-in-%E2%80%9CPodcast-xml%E2%80%9D-speichern-1"><span class="toc-number">2.2.</span> <span class="toc-text">Podcast mit curl herunterladen und in “Podcast.xml” speichern</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Verzeichnis-downloads-anlegen-1"><span class="toc-number">2.3.</span> <span class="toc-text">Verzeichnis ./downloads anlegen</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Filterdatum-im-Typescript-file-line-8-anpassen-1"><span class="toc-number">2.4.</span> <span class="toc-text">Filterdatum im Typescript file, line 8 anpassen</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RssFeedDownloader-aufrufen-1"><span class="toc-number">2.5.</span> <span class="toc-text">RssFeedDownloader aufrufen</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generierte-Statements-ausfuhren-und-Audiodateien-herunterladen-1"><span class="toc-number">2.6.</span> <span class="toc-text">Generierte Statements ausführen und Audiodateien herunterladen</span></a></li></ol></li></ol>
+
+            <!-- Main Post Content -->
+            <h2 id="Podcast-von-BR-herunterladen"><a href="#Podcast-von-BR-herunterladen" class="headerlink" title="Podcast von BR herunterladen"></a>Podcast von BR herunterladen</h2><h3 id="Podcast-mit-curl-herunterladen-und-in-“Podcast-xml”-speichern"><a href="#Podcast-mit-curl-herunterladen-und-in-“Podcast-xml”-speichern" class="headerlink" title="Podcast mit curl herunterladen und in “Podcast.xml” speichern"></a>Podcast mit curl herunterladen und in “Podcast.xml” speichern</h3><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -o  "Podcast.xml" "https://feeds.br.de/radiowissen/feed.xml"</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Verzeichnis-downloads-anlegen"><a href="#Verzeichnis-downloads-anlegen" class="headerlink" title="Verzeichnis ./downloads anlegen"></a>Verzeichnis ./downloads anlegen</h3><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"> C:\Users\fleishor\MyDevelopment\RssFeedDownloader&gt; mkdir downloads</span><br><span class="line"></span><br><span class="line">    Directory: C:\Users\fleishor\MyDevelopment\RssFeedDownloader</span><br><span class="line"></span><br><span class="line">Mode                 LastWriteTime         Length Name</span><br><span class="line">----                 -------------         ------ ----</span><br><span class="line">d----          23.11.2023    13:48                downloads</span><br><span class="line"></span><br><span class="line">PS C:\Users\fleishor\MyDevelopment\RssFeedDownloader&gt; dir</span><br><span class="line"></span><br><span class="line">    Directory: C:\Users\fleishor\MyDevelopment\RssFeedDownloader</span><br><span class="line"></span><br><span class="line">Mode                 LastWriteTime         Length Name</span><br><span class="line">----                 -------------         ------ ----</span><br><span class="line">d----          23.11.2023    13:48                downloads</span><br><span class="line">d----          31.10.2023    10:08                node_modules</span><br><span class="line">-a---          31.10.2023    10:09            227 .eslintrc.cjs</span><br><span class="line">-a---          31.10.2023    10:08          63793 package-lock.json</span><br><span class="line">-a---          09.11.2023    17:21            434 package.json</span><br><span class="line">-a---          23.11.2023    13:42        6237078 Podcast.xml</span><br><span class="line">-a---          15.11.2023    19:04           2033 RssFeedDownloaderARD.ts</span><br><span class="line">-a---          23.11.2023    13:47           2121 RssFeedDownloaderBR.ts</span><br><span class="line">-a---          30.10.2023    14:07          12399 tsconfig.json</span><br><span class="line"></span><br><span class="line">PS C:\Users\fleishor\MyDevelopment\RssFeedDownloader&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Filterdatum-im-Typescript-file-line-8-anpassen"><a href="#Filterdatum-im-Typescript-file-line-8-anpassen" class="headerlink" title="Filterdatum im Typescript file, line 8 anpassen"></a>Filterdatum im Typescript file, line 8 anpassen</h3><figure class="highlight typescript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> startDate = <span class="keyword">new</span> <span class="title class_">Date</span>(<span class="string">"2023-11-23"</span>);</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="RssFeedDownloader-aufrufen"><a href="#RssFeedDownloader-aufrufen" class="headerlink" title="RssFeedDownloader aufrufen"></a>RssFeedDownloader aufrufen</h3><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\fleishor\MyDevelopment\RssFeedDownloader&gt; npm run RssFeedDownloaderBR</span><br><span class="line"></span><br><span class="line">&gt; rssfeeddownloader@1.0.0 RssFeedDownloaderBR</span><br><span class="line">&gt; ts-node RssFeedDownloaderBR.ts</span><br><span class="line"></span><br><span class="line">c:\tools\wget -O ./downloads/231123_0310_radiowissen_flechten-meister-der-extreme-alles-natur.mp3 https://media.neuland.br.de/file/2081037/c/feed/flechten-meister-der-extreme-alles-natur.mp3</span><br><span class="line"></span><br><span class="line">c:\tools\wget -O ./downloads/231123_0300_radiowissen_ordnung-in-die-natur-der-schwedische-forscher-carl-von-linn.mp3 https://media.neuland.br.de/file/2081028/c/feed/ordnung-in-die-natur-der-schwedische-forscher-carl-von-linn.mp3</span><br><span class="line"></span><br><span class="line">PS C:\Users\fleishor\MyDevelopment\RssFeedDownloader&gt; </span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Generierte-Statements-ausfuhren-und-Audiodateien-herunterladen"><a href="#Generierte-Statements-ausfuhren-und-Audiodateien-herunterladen" class="headerlink" title="Generierte Statements ausführen und Audiodateien herunterladen"></a>Generierte Statements ausführen und Audiodateien herunterladen</h3><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">PS C:\Users\fleishor\MyDevelopment\RssFeedDownloader&gt; c:\tools\wget -O ./downloads/231123_0300_radiowissen_ordnung-in-die-natur-der-schwedische-forscher-carl-von-linn.mp3 https://media.neuland.br.de/file/2081028/c/feed/ordnung-in-die-natur-der-schwedische-forscher-carl-von-linn.mp3</span><br><span class="line">--2023-11-27 11:46:10--  https://media.neuland.br.de/file/2081028/c/feed/ordnung-in-die-natur-der-schwedische-forscher-carl-von-linn.mp3</span><br><span class="line">Resolving media.neuland.br.de (media.neuland.br.de)... 34.76.217.83</span><br><span class="line">Connecting to media.neuland.br.de (media.neuland.br.de)|34.76.217.83|:443... connected.</span><br><span class="line">HTTP request sent, awaiting response... 301 Moved Permanently</span><br><span class="line">Location: https://cdn-storage.br.de/MUJIuUOVBwQIbtChb6OHu7ODifWH_-46/_AiS/_2FG5yrH9U1S/231124_0905_radioWissen_Ordnung-in-die-Natur-Der-schwedische-Forsch.mp3?download=true [following]</span><br><span class="line">--2023-11-27 11:46:10--  https://cdn-storage.br.de/MUJIuUOVBwQIbtChb6OHu7ODifWH_-46/_AiS/_2FG5yrH9U1S/231124_0905_radioWissen_Ordnung-in-die-Natur-Der-schwedische-Forsch.mp3?download=true</span><br><span class="line">Resolving cdn-storage.br.de (cdn-storage.br.de)... 195.138.255.24, 195.138.255.8</span><br><span class="line">Connecting to cdn-storage.br.de (cdn-storage.br.de)|195.138.255.24|:443... connected.</span><br><span class="line">HTTP request sent, awaiting response... 200 OK</span><br><span class="line">Length: 24943802 (24M) [audio/mpeg]</span><br><span class="line">Saving to: './downloads/231123_0300_radiowissen_ordnung-in-die-natur-der-schwedische-forscher-carl-von-linn.mp3'</span><br><span class="line"></span><br><span class="line">./downloads/231123_0300_radio 100%[=================================================&gt;]  23,79M  3,62MB/s    in 6,6s</span><br><span class="line"></span><br><span class="line">2023-11-27 11:46:17 (3,63 MB/s) - './downloads/231123_0300_radiowissen_ordnung-in-die-natur-der-schwedische-forscher-carl-von-linn.mp3' saved [24943802/24943802]</span><br><span class="line"></span><br><span class="line">PS C:\Users\fleishor\MyDevelopment\RssFeedDownloader&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="Podcast-von-der-ARD-Audiothek-herunterladen"><a href="#Podcast-von-der-ARD-Audiothek-herunterladen" class="headerlink" title="Podcast von der ARD Audiothek herunterladen"></a>Podcast von der ARD Audiothek herunterladen</h2><p>Im Gegensatz zu BR bietet die ARD die Podcasts nur auf der Webseite an, leider nicht als RSSFeed. Unter <a target="_blank" rel="noopener" href="https://github.com/matztam/ARD-Audiothek-RSS">ARD-Audiothek-RSS</a> hat sich “matztam” schon die Mühe gemacht und einen Konverter geschrieben.</p>
+<h3 id="Install-ARDAudiothek-RSSFeed-converter"><a href="#Install-ARDAudiothek-RSSFeed-converter" class="headerlink" title="Install ARDAudiothek -> RSSFeed converter"></a>Install ARDAudiothek -&gt; RSSFeed converter</h3><ul>
+<li><p><a target="_blank" rel="noopener" href="https://blog.sengotta.net/rss-feed-fuer-ard-audiothek-podcasts/">https://blog.sengotta.net/rss-feed-fuer-ard-audiothek-podcasts/</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/matztam/ARD-Audiothek-RSS">https://github.com/matztam/ARD-Audiothek-RSS</a></p>
+</li>
+</ul>
+<p>Ich hab den Konverter auf der docker.fritz.box als Docker container installiert.</p>
+<h3 id="Podcast-mit-curl-herunterladen-und-in-“Podcast-xml”-speichern-1"><a href="#Podcast-mit-curl-herunterladen-und-in-“Podcast-xml”-speichern-1" class="headerlink" title="Podcast mit curl herunterladen und in “Podcast.xml” speichern"></a>Podcast mit curl herunterladen und in “Podcast.xml” speichern</h3><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -o "Podcast.xml" "http://docker.fritz.box:3010/index.php?show=12810141"</span><br></pre></td></tr></tbody></table></figure>
+
+<p>“12810141” ist die Id des Podcasts, findet man aber relative einfach über die URL des Prodcasts, z.B. “<a target="_blank" rel="noopener" href="https://www.ardaudiothek.de/sendung/der-raeuber-hotzenplotz/12810141/">https://www.ardaudiothek.de/sendung/der-raeuber-hotzenplotz/12810141/</a>“</p>
+<h3 id="Verzeichnis-downloads-anlegen-1"><a href="#Verzeichnis-downloads-anlegen-1" class="headerlink" title="Verzeichnis ./downloads anlegen"></a>Verzeichnis ./downloads anlegen</h3><h3 id="Filterdatum-im-Typescript-file-line-8-anpassen-1"><a href="#Filterdatum-im-Typescript-file-line-8-anpassen-1" class="headerlink" title="Filterdatum im Typescript file, line 8 anpassen"></a>Filterdatum im Typescript file, line 8 anpassen</h3><figure class="highlight typescript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> startDate = <span class="keyword">new</span> <span class="title class_">Date</span>(<span class="string">"2023-11-23"</span>);</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="RssFeedDownloader-aufrufen-1"><a href="#RssFeedDownloader-aufrufen-1" class="headerlink" title="RssFeedDownloader aufrufen"></a>RssFeedDownloader aufrufen</h3><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">PS C:\Users\fleishor\MyDevelopment\RssFeedDownloader&gt; npm run RssFeedDownloaderARD</span><br><span class="line"></span><br><span class="line">&gt; rssfeeddownloader@1.0.0 RssFeedDownloaderARD</span><br><span class="line">&gt; ts-node RssFeedDownloaderARD.ts</span><br><span class="line"></span><br><span class="line">c:\tools\wget -O ./downloads/231013_0004_der-raeuber-hotzenplotz_der-raeuber-hotzenplotz-teil-1.mp3 https://avdlswr-a.akamaihd.net/swr/swr2/hoerspiel/podcast/raeuber-hotzenplotz-teil-1.l.mp3</span><br><span class="line">c:\tools\wget -O ./downloads/231013_0003_der-raeuber-hotzenplotz_der-raeuber-hotzenplotz-teil-2.mp3 https://avdlswr-a.akamaihd.net/swr/swr2/hoerspiel/podcast/raeuber-hotzenplotz-teil-2.l.mp3 </span><br><span class="line">c:\tools\wget -O ./downloads/231013_0002_der-raeuber-hotzenplotz_der-raeuber-hotzenplotz-teil-3.mp3 https://avdlswr-a.akamaihd.net/swr/swr2/hoerspiel/podcast/raeuber-hotzenplotz-teil-3.l.mp3 </span><br><span class="line">c:\tools\wget -O ./downloads/231013_0001_der-raeuber-hotzenplotz_der-raeuber-hotzenplotz-teil-4.mp3 https://avdlswr-a.akamaihd.net/swr/swr2/hoerspiel/podcast/raeuber-hotzenplotz-teil-4.l.mp3 </span><br><span class="line">PS C:\Users\fleishor\MyDevelopment\RssFeedDownloader&gt; </span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Generierte-Statements-ausfuhren-und-Audiodateien-herunterladen-1"><a href="#Generierte-Statements-ausfuhren-und-Audiodateien-herunterladen-1" class="headerlink" title="Generierte Statements ausführen und Audiodateien herunterladen"></a>Generierte Statements ausführen und Audiodateien herunterladen</h3>
+         </div>
+         <!-- right side bar-->
+         <div class="fl w-100 w-20-l pl1-ns mb4">
+
+            <!-- Widget 1: Tags -->
+            
+            <x_partial_widget_tags_ejs>
+  <div class="">
+    <h2>Tags</h2>
+    
+    <p>
+      <a class="fw3 ph1 dib" href="/tags/Typescript/">Typescript</a>
+    </p>
+    
+    <p>
+      <a class="fw3 ph1 dib" href="/tags/NodeJS/">NodeJS</a>
+    </p>
+    
+  </div>
+</x_partial_widget_tags_ejs>
+            
+
+            <!-- Widget 2: ExternalLinks -->
+            
+               <x_partial_widget_external_links_ejs>
+  <div class="">
+    <h2>Links</h2>
+    
+    <p>
+      <a class="fw3 ph1 dib" target="_blank" rel="noopener" href="https://github.com/fleishor/MyDevelopment/tree/master/RssFeedDownloader">RssFeedDownloader</a>
+    </p>
+    
+    <p>
+      <a class="fw3 ph1 dib" target="_blank" rel="noopener" href="https://github.com/matztam/ARD-Audiothek-RSS">ARD-Audiothek-RSS Konverter</a>
+    </p>
+    
+    <p>
+      <a class="fw3 ph1 dib" target="_blank" rel="noopener" href="https://blog.sengotta.net/rss-feed-fuer-ard-audiothek-podcasts/">RSS Feed für ARD Audiothek Podcasts</a>
+    </p>
+    
+  </div>
+</x_partial_widget_external_links_ejs>
+               
+   
+         </div>
+      </div>
+   </div>
+</x_post_ejs>
+
+    <x_partial_footer_ejs>
+   <div class="fixed db w-100 tc tr-l bg-1 bottom-0">
+      <a class="link dim f6 f5-l dib mr3 mr4-l white" href="/admin/datenschutzerklaerung.html" title="Datenschutzerklärung">
+         Datenschutzerklärung
+      </a>
+      <a class="link dim f6 f5-l dib mr3 mr4-l white" href="/admin/impressum.html" title="Impressum">
+         Impressum
+      </a>
+   </div>
+</x_partial_footer_ejs>
+
+  
+
+  
+</x_layout_ejs"></body><script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script><script>window.addEventListener("load", function(){window.cookieconsent.initialise({"theme":"classic","position":"bottom","static":true,"cookie":{"expiryDays":7},"content":{"message":"This website uses cookies to ensure you get the best experience on our website. Who doesn't like cookies?","dismiss":"Feed me"}})});</script></html>

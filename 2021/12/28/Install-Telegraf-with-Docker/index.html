@@ -3,24 +3,24 @@
   
 
   <x_partial_head_ejs>
+   
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- Tachyons Core CSS -->
+      <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css">
 
-    <!-- Tachyons Core CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css">
+      <!-- Custom Fonts -->
+      <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-    <!-- Custom Fonts -->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- Custom CSS -->
-    
+      <!-- Custom CSS -->
+      
 <link rel="stylesheet" href="/css/style.css">
 
-  <meta name="generator" content="Hexo 6.3.0">
+   <meta name="generator" content="Hexo 6.3.0">
 </x_partial_head_ejs>
+
 
   
 
@@ -59,6 +59,10 @@
             <div>
                Installation steps for Telegraf with Docker
             </div>
+
+            <!-- TOC -->
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Create-new-user-telegraf"><span class="toc-number">1.</span> <span class="toc-text">Create new user telegraf</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Add-user-telegraf-to-docker-group"><span class="toc-number">2.</span> <span class="toc-text">Add user telegraf to docker group</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Login-as-user-telegraf"><span class="toc-number">3.</span> <span class="toc-text">Login as user telegraf</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Get-uid-and-gid-for-user-telegraf"><span class="toc-number">4.</span> <span class="toc-text">Get uid and gid for user telegraf</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Create-directories-for-telegraf"><span class="toc-number">5.</span> <span class="toc-text">Create directories for telegraf</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#docker-compose-yaml"><span class="toc-number">5.1.</span> <span class="toc-text">docker-compose.yaml</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#telegraf-conf"><span class="toc-number">6.</span> <span class="toc-text">telegraf.conf</span></a></li></ol>
+
             <!-- Main Post Content -->
             <h1 id="Create-new-user-telegraf"><a href="#Create-new-user-telegraf" class="headerlink" title="Create new user telegraf"></a>Create new user telegraf</h1><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo useradd -m telegraf</span><br></pre></td></tr></tbody></table></figure>
 
@@ -99,6 +103,10 @@
   </div>
 </x_partial_widget_tags_ejs>
             
+
+            <!-- Widget 2: ExternalLinks -->
+            
+   
          </div>
       </div>
    </div>

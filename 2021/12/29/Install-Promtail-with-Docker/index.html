@@ -3,24 +3,24 @@
   
 
   <x_partial_head_ejs>
+   
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- Tachyons Core CSS -->
+      <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css">
 
-    <!-- Tachyons Core CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css">
+      <!-- Custom Fonts -->
+      <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-    <!-- Custom Fonts -->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- Custom CSS -->
-    
+      <!-- Custom CSS -->
+      
 <link rel="stylesheet" href="/css/style.css">
 
-  <meta name="generator" content="Hexo 6.3.0">
+   <meta name="generator" content="Hexo 6.3.0">
 </x_partial_head_ejs>
+
 
   
 
@@ -59,6 +59,10 @@
             <div>
                Installation steps for Promtail with Docker
             </div>
+
+            <!-- TOC -->
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Create-new-user-promtail"><span class="toc-number">1.</span> <span class="toc-text">Create new user promtail</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Add-user-promtail-to-docker-group"><span class="toc-number">2.</span> <span class="toc-text">Add user promtail to docker group</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Login-as-user-promtail"><span class="toc-number">3.</span> <span class="toc-text">Login as user promtail</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Create-directories-for-promtail"><span class="toc-number">4.</span> <span class="toc-text">Create directories for promtail</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#docker-compose-yaml-file"><span class="toc-number">5.</span> <span class="toc-text">docker-compose.yaml file</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Gather-journald-logs-and-Docker-container-logs"><span class="toc-number">6.</span> <span class="toc-text">Gather journald logs and Docker container logs</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#etc-docker-daemon-json"><span class="toc-number">7.</span> <span class="toc-text">/etc/docker/daemon.json</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#etc-promtail-promtail-yaml"><span class="toc-number">8.</span> <span class="toc-text">/etc/promtail/promtail.yaml</span></a></li></ol>
+
             <!-- Main Post Content -->
             <h1 id="Create-new-user-promtail"><a href="#Create-new-user-promtail" class="headerlink" title="Create new user promtail"></a>Create new user promtail</h1><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo useradd -m promtail</span><br></pre></td></tr></tbody></table></figure>
 
@@ -71,14 +75,14 @@
 <h1 id="docker-compose-yaml-file"><a href="#docker-compose-yaml-file" class="headerlink" title="docker-compose.yaml file"></a>docker-compose.yaml file</h1><figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">"3.5"</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">   <span class="attr">promtail:</span></span><br><span class="line">      <span class="attr">image:</span> <span class="string">grafana/promtail:latest</span></span><br><span class="line">      <span class="attr">pid:</span> <span class="string">"host"</span></span><br><span class="line">      <span class="attr">container_name:</span> <span class="string">promtail</span></span><br><span class="line">      <span class="attr">command:</span> <span class="string">-config.file=/etc/promtail/promtail.yaml</span></span><br><span class="line">      <span class="attr">volumes:</span></span><br><span class="line">         <span class="bullet">-</span> <span class="string">/run/log/journal:/run/log/journal:ro</span></span><br><span class="line">         <span class="bullet">-</span> <span class="string">/var/lib/docker/containers:/var/lib/docker/containers:ro</span></span><br><span class="line">         <span class="bullet">-</span> <span class="string">./etc_promtail/promtail.yaml:/etc/promtail/promtail.yaml</span></span><br><span class="line">      <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">      <span class="attr">networks:</span></span><br><span class="line">         <span class="bullet">-</span> <span class="string">influxdb2</span></span><br><span class="line"></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line">  <span class="attr">influxdb2:</span></span><br><span class="line">    <span class="attr">external:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">"influxdb2"</span></span><br></pre></td></tr></tbody></table></figure>
 
 <h1 id="Gather-journald-logs-and-Docker-container-logs"><a href="#Gather-journald-logs-and-Docker-container-logs" class="headerlink" title="Gather journald logs and Docker container logs"></a>Gather journald logs and Docker container logs</h1><p><img src="/SmartHome/Docker/Install-Promtail-with-Docker/Install-Promtail-with-Docker/overview.svg" alt="Overview"></p>
-<h1 id="x2F-etc-x2F-docker-x2F-daemon-json"><a href="#x2F-etc-x2F-docker-x2F-daemon-json" class="headerlink" title="/etc/docker/daemon.json"></a>/etc/docker/daemon.json</h1><p><a target="_blank" rel="noopener" href="https://docs.docker.com/config/containers/logging/log_tags/">https://docs.docker.com/config/containers/logging/log_tags/</a></p>
+<h1 id="etc-docker-daemon-json"><a href="#etc-docker-daemon-json" class="headerlink" title="/etc/docker/daemon.json"></a>/etc/docker/daemon.json</h1><p><a target="_blank" rel="noopener" href="https://docs.docker.com/config/containers/logging/log_tags/">https://docs.docker.com/config/containers/logging/log_tags/</a></p>
 <p>Add tag log option so ImageName and Name will be written to Docker log files;<br>new tag flag will be only add after containers are recreated</p>
 <figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">{</span></span><br><span class="line">  <span class="attr">"log-driver"</span><span class="punctuation">:</span> <span class="string">"json-file"</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">"log-opts"</span><span class="punctuation">:</span> <span class="punctuation">{</span></span><br><span class="line">    <span class="attr">"max-size"</span><span class="punctuation">:</span> <span class="string">"10m"</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">"max-file"</span><span class="punctuation">:</span> <span class="string">"3"</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">"tag"</span><span class="punctuation">:</span> <span class="string">"{{.ImageName}}|{{.Name}}"</span></span><br><span class="line">  <span class="punctuation">}</span></span><br><span class="line"><span class="punctuation">}</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p>Example log line</p>
 <figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">{</span></span><br><span class="line">   <span class="attr">"log"</span><span class="punctuation">:</span><span class="string">"t=2021-12-30T10:38:14+0000 lvl=info msg=\"Successful Login\" logger=http.server User=admin@localhost\n"</span><span class="punctuation">,</span></span><br><span class="line">   <span class="attr">"stream"</span><span class="punctuation">:</span><span class="string">"stdout"</span><span class="punctuation">,</span></span><br><span class="line">   <span class="attr">"attrs"</span><span class="punctuation">:</span></span><br><span class="line">   <span class="punctuation">{</span></span><br><span class="line">      <span class="attr">"tag"</span><span class="punctuation">:</span><span class="string">"grafana/grafana:latest|grafana"</span></span><br><span class="line">   <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">   <span class="attr">"time"</span><span class="punctuation">:</span><span class="string">"2021-12-30T10:38:14.566975699Z"</span></span><br><span class="line"><span class="punctuation">}</span></span><br></pre></td></tr></tbody></table></figure>
 
-<h1 id="x2F-etc-x2F-promtail-x2F-promtail-yaml"><a href="#x2F-etc-x2F-promtail-x2F-promtail-yaml" class="headerlink" title="/etc/promtail/promtail.yaml"></a>/etc/promtail/promtail.yaml</h1><p>Promtail configuration for sending</p>
+<h1 id="etc-promtail-promtail-yaml"><a href="#etc-promtail-promtail-yaml" class="headerlink" title="/etc/promtail/promtail.yaml"></a>/etc/promtail/promtail.yaml</h1><p>Promtail configuration for sending</p>
 <ul>
 <li>systemd journal messages (job_name: journal) and</li>
 <li>container logs (job_name: container) to Loki</li>
@@ -114,6 +118,10 @@
   </div>
 </x_partial_widget_tags_ejs>
             
+
+            <!-- Widget 2: ExternalLinks -->
+            
+   
          </div>
       </div>
    </div>
