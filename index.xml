@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+    <channel>
+      <title>MyDigitalGarden</title>
+      <link>https://fleishor.github.io</link>
+      <description>Last 10 notes on MyDigitalGarden</description>
+      <generator>Quartz -- quartz.jzhao.xyz</generator>
+      <item>
+    <title>S.O.L.I.D Principles</title>
+    <link>https://fleishor.github.io/Softwarearchitecture/SOLID-Principles</link>
+    <guid>https://fleishor.github.io/Softwarearchitecture/SOLID-Principles</guid>
+    <description>Die SOLID-Prinzipien sind fünf grundlegende Prinzipien des objektorientierten Designs, die darauf abzielen, Software verständlicher, flexibler und wartbarer zu machen. ...</description>
+    <pubDate>Fri, 21 Feb 2025 15:30:03 GMT</pubDate>
+  </item><item>
+    <title>MyDigitalGarden</title>
+    <link>https://fleishor.github.io/</link>
+    <guid>https://fleishor.github.io/</guid>
+    <description>...</description>
+    <pubDate>Fri, 21 Feb 2025 15:30:03 GMT</pubDate>
+  </item><item>
+    <title>InfluxDB 2.x with Docker</title>
+    <link>https://fleishor.github.io/SmartHome/Docker/Installations/InfluxDB2-with-Docker</link>
+    <guid>https://fleishor.github.io/SmartHome/Docker/Installations/InfluxDB2-with-Docker</guid>
+    <description>Installation steps for InfluxDB 2.x with Docker.</description>
+    <pubDate>Fri, 21 Feb 2025 15:30:03 GMT</pubDate>
+  </item><item>
+    <title>Keycloak with Docker</title>
+    <link>https://fleishor.github.io/SmartHome/Docker/Installations/Keycloak-with-Docker</link>
+    <guid>https://fleishor.github.io/SmartHome/Docker/Installations/Keycloak-with-Docker</guid>
+    <description>Installation steps for Keycloak with Docker.</description>
+    <pubDate>Fri, 21 Feb 2025 15:30:03 GMT</pubDate>
+  </item><item>
+    <title>Loki with Docker</title>
+    <link>https://fleishor.github.io/SmartHome/Docker/Installations/Loki-with-Docker</link>
+    <guid>https://fleishor.github.io/SmartHome/Docker/Installations/Loki-with-Docker</guid>
+    <description>Installation steps for Loki with Docker.</description>
+    <pubDate>Fri, 21 Feb 2025 15:30:03 GMT</pubDate>
+  </item><item>
+    <title>Mosquitto with Docker</title>
+    <link>https://fleishor.github.io/SmartHome/Docker/Installations/Mosquitto-with-Docker</link>
+    <guid>https://fleishor.github.io/SmartHome/Docker/Installations/Mosquitto-with-Docker</guid>
+    <description>Installation steps for Mosquitto with Docker.</description>
+    <pubDate>Fri, 21 Feb 2025 15:30:03 GMT</pubDate>
+  </item><item>
+    <title>NodeRed with Docker</title>
+    <link>https://fleishor.github.io/SmartHome/Docker/Installations/NodeRed-with-Docker</link>
+    <guid>https://fleishor.github.io/SmartHome/Docker/Installations/NodeRed-with-Docker</guid>
+    <description>Installation steps for NodeRed with Docker.</description>
+    <pubDate>Fri, 21 Feb 2025 15:30:03 GMT</pubDate>
+  </item><item>
+    <title>Promtail with Docker</title>
+    <link>https://fleishor.github.io/SmartHome/Docker/Installations/Promtail-with-Docker</link>
+    <guid>https://fleishor.github.io/SmartHome/Docker/Installations/Promtail-with-Docker</guid>
+    <description>Installation steps for Promtail with Docker.</description>
+    <pubDate>Fri, 21 Feb 2025 15:30:03 GMT</pubDate>
+  </item><item>
+    <title>Telegraf with Docker</title>
+    <link>https://fleishor.github.io/SmartHome/Docker/Installations/Telegraf-with-Docker</link>
+    <guid>https://fleishor.github.io/SmartHome/Docker/Installations/Telegraf-with-Docker</guid>
+    <description>Installation steps for Telegraf with Docker.</description>
+    <pubDate>Fri, 21 Feb 2025 15:30:03 GMT</pubDate>
+  </item><item>
+    <title>Integrate Voltcraft SEM6000 (homematic.fritz.box)</title>
+    <link>https://fleishor.github.io/SmartHome/Homematic/Integrate-Voltcraft-Sem6000-on-RaspberryPi</link>
+    <guid>https://fleishor.github.io/SmartHome/Homematic/Integrate-Voltcraft-Sem6000-on-RaspberryPi</guid>
+    <description>Integrate Voltcraft SEM6000.</description>
+    <pubDate>Fri, 21 Feb 2025 15:30:03 GMT</pubDate>
+  </item>
+    </channel>
+  </rss>
