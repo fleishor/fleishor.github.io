@@ -1,9 +1,0 @@
-{
-	"nodes":[
-		{"id":"4524e51ca7335a2f","x":-440,"y":-300,"width":250,"height":60,"type":"text","text":"KI"},
-		{"id":"5784233218f4bf25","x":-40,"y":-380,"width":250,"height":60,"type":"text","text":"In der Bildung"}
-	],
-	"edges":[
-		{"id":"94bdfd6e05f70f85","fromNode":"4524e51ca7335a2f","fromSide":"right","toNode":"5784233218f4bf25","toSide":"left"}
-	]
-}

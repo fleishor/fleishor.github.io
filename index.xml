@@ -6,16 +6,40 @@
       <description>Last 10 notes on MyDigitalGarden</description>
       <generator>Quartz -- quartz.jzhao.xyz</generator>
       <item>
-    <title>S.O.L.I.D Principles</title>
-    <link>https://fleishor.github.io/Softwarearchitecture/SOLID-Principles</link>
-    <guid>https://fleishor.github.io/Softwarearchitecture/SOLID-Principles</guid>
-    <description>Die SOLID-Prinzipien sind fünf grundlegende Prinzipien des objektorientierten Designs, die darauf abzielen, Software verständlicher, flexibler und wartbarer zu machen. ...</description>
-    <pubDate>Fri, 21 Feb 2025 15:30:03 GMT</pubDate>
-  </item><item>
     <title>MyDigitalGarden</title>
     <link>https://fleishor.github.io/</link>
     <guid>https://fleishor.github.io/</guid>
     <description>...</description>
+    <pubDate>Thu, 17 Apr 2025 20:12:20 GMT</pubDate>
+  </item><item>
+    <title>Keycloak configuration</title>
+    <link>https://fleishor.github.io/Dotnet/Keycloak/Keycloak-Configuration</link>
+    <guid>https://fleishor.github.io/Dotnet/Keycloak/Keycloak-Configuration</guid>
+    <description>Install Keycloak with Docker Keycloak-with-Docker Create New Realm fleishor Adjust Realm Settings Because “Unmanaged Attributes” is disabled, all additional user properties ...</description>
+    <pubDate>Thu, 17 Apr 2025 20:12:20 GMT</pubDate>
+  </item><item>
+    <title>Keycloak Node.js adapter</title>
+    <link>https://fleishor.github.io/Dotnet/Keycloak/Node-Express</link>
+    <guid>https://fleishor.github.io/Dotnet/Keycloak/Node-Express</guid>
+    <description>Authenticate with Node to Keycloak.</description>
+    <pubDate>Thu, 17 Apr 2025 20:12:20 GMT</pubDate>
+  </item><item>
+    <title>Elastic8 - Übersicht</title>
+    <link>https://fleishor.github.io/Elastic8/Glossar</link>
+    <guid>https://fleishor.github.io/Elastic8/Glossar</guid>
+    <description>Eine Übersicht über Elastic8.</description>
+    <pubDate>Thu, 17 Apr 2025 20:12:20 GMT</pubDate>
+  </item><item>
+    <title>Keycloak - Glossar</title>
+    <link>https://fleishor.github.io/Dotnet/Keycloak/Glossar</link>
+    <guid>https://fleishor.github.io/Dotnet/Keycloak/Glossar</guid>
+    <description>Referenzen An Introduction to OAuth 2 Realm Ein Realm in Keycloak ist eine grundlegende Verwaltungseinheit, die eine Gruppe von Benutzern, Anwendungen und Rollen umfasst ...</description>
+    <pubDate>Thu, 17 Apr 2025 20:12:20 GMT</pubDate>
+  </item><item>
+    <title>S.O.L.I.D Principles</title>
+    <link>https://fleishor.github.io/Softwarearchitecture/SOLID-Principles</link>
+    <guid>https://fleishor.github.io/Softwarearchitecture/SOLID-Principles</guid>
+    <description>Die SOLID-Prinzipien sind fünf grundlegende Prinzipien des objektorientierten Designs, die darauf abzielen, Software verständlicher, flexibler und wartbarer zu machen. ...</description>
     <pubDate>Fri, 21 Feb 2025 15:30:03 GMT</pubDate>
   </item><item>
     <title>InfluxDB 2.x with Docker</title>
@@ -40,30 +64,6 @@
     <link>https://fleishor.github.io/SmartHome/Docker/Installations/Mosquitto-with-Docker</link>
     <guid>https://fleishor.github.io/SmartHome/Docker/Installations/Mosquitto-with-Docker</guid>
     <description>Installation steps for Mosquitto with Docker.</description>
-    <pubDate>Fri, 21 Feb 2025 15:30:03 GMT</pubDate>
-  </item><item>
-    <title>NodeRed with Docker</title>
-    <link>https://fleishor.github.io/SmartHome/Docker/Installations/NodeRed-with-Docker</link>
-    <guid>https://fleishor.github.io/SmartHome/Docker/Installations/NodeRed-with-Docker</guid>
-    <description>Installation steps for NodeRed with Docker.</description>
-    <pubDate>Fri, 21 Feb 2025 15:30:03 GMT</pubDate>
-  </item><item>
-    <title>Promtail with Docker</title>
-    <link>https://fleishor.github.io/SmartHome/Docker/Installations/Promtail-with-Docker</link>
-    <guid>https://fleishor.github.io/SmartHome/Docker/Installations/Promtail-with-Docker</guid>
-    <description>Installation steps for Promtail with Docker.</description>
-    <pubDate>Fri, 21 Feb 2025 15:30:03 GMT</pubDate>
-  </item><item>
-    <title>Telegraf with Docker</title>
-    <link>https://fleishor.github.io/SmartHome/Docker/Installations/Telegraf-with-Docker</link>
-    <guid>https://fleishor.github.io/SmartHome/Docker/Installations/Telegraf-with-Docker</guid>
-    <description>Installation steps for Telegraf with Docker.</description>
-    <pubDate>Fri, 21 Feb 2025 15:30:03 GMT</pubDate>
-  </item><item>
-    <title>Integrate Voltcraft SEM6000 (homematic.fritz.box)</title>
-    <link>https://fleishor.github.io/SmartHome/Homematic/Integrate-Voltcraft-Sem6000-on-RaspberryPi</link>
-    <guid>https://fleishor.github.io/SmartHome/Homematic/Integrate-Voltcraft-Sem6000-on-RaspberryPi</guid>
-    <description>Integrate Voltcraft SEM6000.</description>
     <pubDate>Fri, 21 Feb 2025 15:30:03 GMT</pubDate>
   </item>
     </channel>
